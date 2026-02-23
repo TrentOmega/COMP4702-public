@@ -1,0 +1,9 @@
+# Auto-generated from conda env 'comp4702' (from-history)
+# Regenerate with: ./scripts/sync_requirements.sh
+scikit-learn
+ipykernel
+scipy
+numpy
+matplotlib
+pandas
+jupyter
