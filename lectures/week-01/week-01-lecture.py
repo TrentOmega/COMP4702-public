@@ -41,6 +41,61 @@ np.random.seed(SEED)
 print(f"Seed set to {SEED}")
 
 # %% [markdown]
+# ## Week 1 lecture transcript summary (admin + course framing)
+#
+# Based on lecture transcript: [COMP4702_S1_2026_ST-transcript.txt](COMP4702_S1_2026_ST-transcript.txt)
+#
+# ### Key logistics
+#
+# - Week 1 is mostly course admin and course expectations; only a light start on ML content.
+# - No prac classes in Week 1.
+# - Use `Ed` as the default channel for questions (large class size; email does not scale well).
+# - The course is designed to be interactive where possible, even in a large class.
+#
+# ### Assessment structure (high-level)
+#
+# - Final exam is the major component (pen-and-paper, closed-book).
+# - There is one assignment, and the rubric is being adapted because LLM tools can automate much of the old workflow.
+# - There is a choice for the smaller assessment component:
+#   - lecture participation, or
+#   - prac demos.
+# - `COMP4702` and `COMP7703` share core content but may differ in assignment rubric/assessment details.
+#
+# ### AI / LLM policy takeaways
+#
+# - The lecturer does not treat AI bans as a practical solution in all settings.
+# - AI use may be allowed in some coursework contexts, but not relied on to assess learning.
+# - Final exam and oral/prac demo components help assess individual understanding.
+# - Main message: use LLMs carefully so they do not replace the learning process.
+#
+# ### Learning philosophy (useful for doing well in the course)
+#
+# - Focus on learning, not only grades.
+# - Engage actively in class discussion and on `Ed`.
+# - Write notes by hand (or on a tablet) during class to support learning.
+# - Expect uncertainty, trade-offs, and “it depends” answers in ML rather than one universally best method.
+#
+# ### Chapter 1 tie-in from the lecture
+#
+# The lecturer previews Lindholm Chapter 1 by emphasising:
+#
+# - ML as learning from data using a mathematical model and learning algorithm,
+# - parameter adjustment as the core learning process (often via optimisation),
+# - classification vs regression as core supervised-learning problem types,
+# - uncertainty/probabilistic outputs as a recurring theme,
+# - real-world examples (ECG diagnosis, crystal energy prediction, soccer goal probability, image pixel labels, pollution estimation) as motivation.
+#
+# ### Week 1 exam-relevant takeaways from the lecture
+#
+# - Know the distinction between:
+#   - mathematical model (what is being fitted), and
+#   - learning algorithm (how it is fitted).
+# - Be comfortable with:
+#   - classification vs regression,
+#   - labels/training data,
+#   - generalisation to unseen data,
+#   - uncertainty in model predictions.
+#
 # ## Chapter 1 summary (Lindholm): what matters for ML
 #
 # ### 1) What machine learning is (core framing)
