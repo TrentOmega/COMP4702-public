@@ -42,7 +42,7 @@ print(f"Seed set to {SEED}")
 
 ## Week 1 lecture transcript summary (admin + course framing)
 
-Based on lecture transcript: [COMP4702_S1_2026_ST-transcript.txt](COMP4702_S1_2026_ST-transcript.txt)
+Codex summary based on lecture transcript: [COMP4702_S1_2026_ST-transcript.txt](COMP4702_S1_2026_ST-transcript.txt)
 
 ### Key logistics
 
