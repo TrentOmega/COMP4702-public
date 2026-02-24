@@ -5,10 +5,10 @@ Coursework repository for `COMP4702`, organised for reproducible study, practica
 ## What Is In This Repo
 
 - `lectures/`: weekly lecture notes/notebooks (Jupytext paired where used)
-- `pracs/`: practical materials, PDFs, and worked notebooks
-- `assignment/`: report/code/notebooks/figures/submission workspace
+- `pracs/`: practical materials, PDFs, and worked notebooks (not public)
+- `assignment/`: report/code/notebooks/figures/submission workspace (not public)
 - `references/`: exams, course summary table, textbook, and course reference files
-- `shared/`: reusable fixtures/templates/scripts for small experiments
+- `shared/`: reusable fixtures/templates/scripts for small experiments (not public)
 - `scripts/`: repo utility scripts (notebook execution, Jupytext sync, requirements sync, smoke test)
 
 Current populated examples include:

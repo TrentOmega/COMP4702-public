@@ -22,7 +22,7 @@ jupyter:
 - Topic: Introduction and background review.
 - Important concept: machine learning definitions and examples.
 - Reading: [Lindholm (2022), Chapter 1](../../references/main-text-book-machine-learning-lindholm-2022.pdf).
-- Prac: no prac this week; focus on background knowledge.
+- Prac: none this week; focus on background knowledge.
 
 ## Learning goals for this notebook
 
