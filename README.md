@@ -82,6 +82,39 @@ A repo-local pre-commit hook (`.githooks/pre-commit`) auto-syncs `requirements.t
 git config core.hooksPath .githooks
 ```
 
+## Public Repo Export / Publish (not relevent for the public repo)
+
+This repo can export a curated public copy to a separate git repository (for sharing notes/materials without the full private repo contents).
+
+Export only (sync files into the public copy):
+
+```bash
+./scripts/export_public.sh
+```
+
+Export + stage + commit + push the public repo:
+
+```bash
+./scripts/publish_public.sh
+```
+
+Optional arguments:
+
+```bash
+./scripts/publish_public.sh /home/user/Documents/Uni/COMP4702-public-copy "Update public notes"
+```
+
+If you already ran `export_public.sh` manually and the public repo is now dirty, you can skip the export step and publish the existing changes:
+
+```bash
+./scripts/publish_public.sh --skip-export --allow-dirty /home/user/Documents/Uni/COMP4702-public-copy "Update public notes"
+```
+
+Notes:
+- `scripts/publish_public.sh` refuses to run if the public repo has uncommitted changes (safety check).
+- Use `--skip-export --allow-dirty` only when you intentionally want to publish changes already present in the public repo working tree.
+- The destination public repo must already exist, be a git repo, and have an `origin` remote configured.
+
 ## Notebook Output Hygiene
 
 - `.gitattributes` configures `nbstripout` for `*.ipynb`
