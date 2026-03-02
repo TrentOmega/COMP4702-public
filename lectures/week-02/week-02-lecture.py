@@ -18,7 +18,7 @@
 # %% [markdown]
 # # Week 2 Lecture Notes: Lindholm Chapter 2 (Exam-Focused)
 #
-# ## Scope for Week 2 (from CourseSummaryTable_v1_26)
+# ## Scope for Week 2
 #
 # - Topic: supervised learning.
 # - Core methods: `k`-nearest neighbours and decision trees.
@@ -44,6 +44,8 @@ print(f"Seed set to {SEED}")
 # %% [markdown]
 # ## Chapter 2 summary (Lindholm): what matters most
 #
+# Supervised learning is a catagory of machine learning where all training data has associated output labels. The model is then trained to predict an output from an unknown input value.
+#
 # ### 1) Supervised learning setup
 #
 # - Training data is labelled pairs: `T = {(x_i, y_i)}_{i=1}^n`.
@@ -57,16 +59,27 @@ print(f"Seed set to {SEED}")
 # Chapter 2 emphasises this explicitly: fitting training data is not enough.
 # The useful model is the one that predicts well on *new* unseen inputs.
 #
-# ### 3) k-NN (distance-based non-parametric method)
+# ### 3) Parametric/non-parametric methods
+# - **Non-parametric methods** use the training data for making predictions
+# - **Parmetric methods** use a model governed by a fixed number of parameters.
+#
+# ### 3) k-NN classifier (distance-based non-parametric method)
 #
 # - Predict using nearby training points in input space.
 # - Classification: majority vote among the `k` nearest neighbours.
 # - Regression: average of neighbour targets.
 # - `k` is a **hyperparameter** (chosen by user, not learned directly).
+# - A **decision boundary** for a classifyer is the point in the input space where the class prediction abruptly changes.
 #
 # Key tradeoff:
 # - small `k` (especially `k=1`) -> very flexible, often overfits,
 # - large `k` -> smoother, can underfit.
+#
+# ### 5) Input normalisation
+# - Input data needs to be normalised otherwise certain input dimensions will dominate the results
+# - Two methods
+#   - [codex complete from lindholm]
+#   - [codex complete from lindholm]
 #
 # ### 4) Decision trees (rule-based method)
 #
@@ -74,6 +87,16 @@ print(f"Seed set to {SEED}")
 # - Leaves output constant predictions:
 #   - class vote (classification),
 #   - mean value (regression).
+# - Definitions:
+#   - **leaf nodes** are the end points of the branching which are different regions of the input space.
+#   - **internal nodes** are the internal splits of the tree.
+#   - **branches** are the lines connecting the nodes.
+# - Searching through all possible binary trees is not possible for any practicle case (the problem is NP-complete)
+# - **Recursive binary splitting** is the heuristic algorithm for learning the tree.
+#   - Greedy algorithm: [codex give a short one sentence explaination]
+#   - **Learning a regression tree**
+#     - Each leaf node will have a predicted out put y_hat_l = av{y_i : **x_i** [belongs to] R_l}, where l is leaf node 1,2,...,L, i is the data point 1,2,...,n
+#     - It will search through each 
 # - Trees are also non-linear and piecewise-constant predictors.
 #
 # ### 5) Split criteria for classification trees
@@ -85,7 +108,13 @@ print(f"Seed set to {SEED}")
 #
 # Practical Chapter 2 point: Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
 #
-# ## Exam-oriented priorities from 2023, 2024, 2025 exams
+# ### 6) Typical variable symbols
+# p, dimension of the input vector, variable j
+# n, number of data points, variable i
+# L, number of distinct regions in the decision tree, variable l
+
+# %% [markdown]
+# ## Past exam-oriented priorities (23-25)
 #
 # These concepts recur directly in MCQs and longer questions:
 #
@@ -98,12 +127,6 @@ print(f"Seed set to {SEED}")
 # 7. confusion matrix for classification performance,
 # 8. logistic decision boundary output `0.5` (bridge concept to Chapter 3, but appears repeatedly in exams).
 #
-# Year-specific emphasis:
-#
-# - 2023: hold-out purpose, `k` meaning, tree split metrics, decision stump + misclassification, bias-variance tradeoff figure.
-# - 2024: `k`-NN meaning, fold-size arithmetic, tree/logistic/k-NN behaviour on same dataset, underfitting/overfitting vs complexity.
-# - 2025: logistic boundary `0.5`, hyperparameter identification, AUC/misclassification familiarity, `k`-NN train/test curve interpretation, tree prediction path + confusion matrix.
-#
 # Fast exam checklist:
 #
 # - Can I explain why `k=1` can have zero training error yet still generalise poorly?
@@ -112,11 +135,11 @@ print(f"Seed set to {SEED}")
 # - Can I build a confusion matrix from predicted vs true labels?
 # - Can I state why decision boundary output is `0.5` for standard logistic binary classification?
 #
-# ## Past Exam Questions (2023-2025, exact text)
+# ## Past Exam Questions (23-25)
 #
-# Note: These are copied exactly from the exam text extraction file: [COMP4702_exams_2023_2025.md](../../references/COMP4702_exams_2023_2025.md).
+# Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_2025.md](../../references/COMP4702_exams_2023_2025.md).
 #
-# ### 2023 exam (Week 2-relevant prompts)
+# ### 2023 exam
 #
 # - Question 4. What does the “k” in the kNN algorithm represent? ([2023 exam PDF](../../references/2023_COMP4702_exam.pdf), Part A)
 #   - (a) The number of training examples used for each prediction.
@@ -135,7 +158,7 @@ print(f"Seed set to {SEED}")
 #   - (ii) State the misclassification rate of the trained model on the training set and explain
 #     why.                                                                               (2 marks)
 #
-# ### 2024 exam (Week 2-relevant prompts)
+# ### 2024 exam
 #
 # - Question 2. In the k-nearest neighbours method (k-NN), k refers to: ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part A)
 #   - (a) The maximum number of training iterations.
@@ -154,7 +177,7 @@ print(f"Seed set to {SEED}")
 #   - (b) Explain the general relationship between underfitting, overfitting and model complexity in super-
 #     vised learning. You should refer to Figure 2 to assist with your explanation.          (6 marks)
 #
-# ### 2025 exam (Week 2-relevant prompts)
+# ### 2025 exam
 #
 # - Question 4. Which of the following is not an example of a hyperparameter? ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part A)
 #   - (a) The value of k in k-nearest neighbours.
