@@ -110,6 +110,84 @@ Fast exam checklist:
 - Can I build a confusion matrix from predicted vs true labels?
 - Can I state why decision boundary output is `0.5` for standard logistic binary classification?
 
+## Past Exam Questions (2023-2025, exact text)
+
+Note: These are copied exactly from the exam text extraction file: [COMP4702_exams_2023_2025.md](../../references/COMP4702_exams_2023_2025.md).
+
+### 2023 exam (Week 2-relevant prompts)
+
+- Question 4. What does the “k” in the kNN algorithm represent? ([2023 exam PDF](../../references/2023_COMP4702_exam.pdf), Part A)
+  - (a) The number of training examples used for each prediction.
+  - (b) The number of features in the dataset.
+  - (c) The number of classes in the dataset.
+  - (d) The regularisation term in the loss function.
+- Question 5. Which of the following metrics is NOT suitable for evaluating the quality of a split in a decision tree for classification? ([2023 exam PDF](../../references/2023_COMP4702_exam.pdf), Part A)
+  - (a) Entropy.
+  - (b) Gini index.
+  - (c) Misclassification rate.
+  - (d) Sensitivity.
+- Question 1(a) (Part B): ([2023 exam PDF](../../references/2023_COMP4702_exam.pdf), Part B)
+  - (a) Consider using a decision stump (i.e. a decision tree with depth = 1) to classify this data.
+    (i) From Figure 1, specify the trained model (approximately) in terms of an IF...THEN decision
+    rule.                                                                           (2 marks)
+  - (ii) State the misclassification rate of the trained model on the training set and explain
+    why.                                                                               (2 marks)
+
+### 2024 exam (Week 2-relevant prompts)
+
+- Question 2. In the k-nearest neighbours method (k-NN), k refers to: ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part A)
+  - (a) The maximum number of training iterations.
+  - (b) The number of data points that are used to determine any prediction made by the model.
+  - (c) The learning rate parameter.
+  - (d) The number of base models that are combined to produce the final output.
+- Question 1(a) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
+  - (a) A decision tree is trained on this data and creates the discriminant function/decision boundary
+    shown by the shaded rectangle, C. Draw a diagram of this decision tree, including the rule/decision
+    made at each node and the final classification at each leaf node.                        (4 marks)
+- Question 1(c) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
+  - (c) Consider using k-nearest neighbour to classify the data in Figure 1. If a test point x⋆ was located at
+    the centre of the shaded rectangle, describe how the prediction would change for different possible
+    k values.                                                                                   (4 marks)
+- Question 2(b) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
+  - (b) Explain the general relationship between underfitting, overfitting and model complexity in super-
+    vised learning. You should refer to Figure 2 to assist with your explanation.          (6 marks)
+
+### 2025 exam (Week 2-relevant prompts)
+
+- Question 4. Which of the following is not an example of a hyperparameter? ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part A)
+  - (a) The value of k in k-nearest neighbours.
+  - (b) The number of layers in a feed-forward neural network.
+  - (c) The offset term in linear regression, θ0 .
+  - (d) The filter size in a convolutional neural network layer.
+- Question 6. A commonly used loss function in machine learning is given by: ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part A)
+  - (
+      0 if ŷ = y.
+    L(y, ŷ) = I{ŷ ̸= y} =
+      1 if ŷ ̸= y.
+  - This is known as the:
+  - (a) Misclassification loss.
+  - (b) Mean squared error.
+  - (c) ϵ-insensitive loss.
+  - (d) Cross-entropy loss.
+- Question 1(a)-(c) (Part B): ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part B)
+  - (a) Explain the shape of the test curve shown.                                         (4 marks)
+  - (b) The training curve in Figure 1 has a misclassification rate of 0 at k = 1. Explain how this is
+    possible and hence would be true for any dataset.                                   (4 marks)
+  - (c) Figure 1 shows that as k increases, the misclassification rate on the training set increases. What
+    does this suggest about the relationship between k, model complexity overfitting and
+    underfitting?                                                                             (4 marks)
+- Question 2(a)-(c) (Part B): ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part B)
+  - (a) Given a test point x′ = [petal length = 3cm, petal width = 2.5cm], what is the predicted output
+    from the decision tree and explain how it arrives at this output.                     (5 marks)
+  - (b) What is the misclassification rate of the tree?                                      (3 marks)
+  - (c) Draw the confusion matrix for this data, including labels for each row and column.    (5 marks)
+
+### How to use these for Week 2 revision
+
+- First pass: answer each question without notes.
+- Second pass: map each question to one Chapter 2 skill (`k`-NN intuition, tree split criteria, misclassification/confusion matrix, overfitting-underfitting).
+- Third pass: redo any question you missed and write a one-line error diagnosis (concept gap, arithmetic slip, or interpretation mistake).
+
 ## Toy example 1: `k`-NN from scratch (classification)
 
 This demonstrates the exam-relevant effect of changing `k`.
