@@ -46,11 +46,11 @@ Supervised learning is a category of machine learning where all training data ha
 
 ### 1) Supervised learning setup
 
-- Training data is labelled pairs: `T = {(x_i, y_i)}_{i=1}^n`.
-- Input `x` can be high-dimensional (`p` features).
-- Output `y` type defines the problem:
-  - regression: `y` numerical,
-  - classification: `y` categorical.
+- Training data is labelled pairs: $T=\{(x_i, y_i)\}_{i=1}^n$.
+- Input $x$ can be high-dimensional ($p$ features).
+- Output $y$ type defines the problem:
+  - regression: $y$ numerical,
+  - classification: $y$ categorical.
 
 ### 2) Generalisation is the objective
 
@@ -81,12 +81,12 @@ Key tradeoff:
 
 ### 6) Decision trees (rule-based method)
 
-- Split input space with binary rules (`x_j < s`).
+- Split input space with binary rules ($x_j < s$).
 - Leaves output constant predictions:
   - class vote (classification),
   - mean value (regression).
 - Definitions:
-  - **leaf nodes** are the end points of the branching which are different regions of the input space.
+  - **leaf nodes** are the end points of the branching which are decision regions of the input space.
   - **internal nodes** are the internal splits of the tree.
   - **branches** are the lines connecting the nodes.
 - Searching through all possible binary trees is not possible in practical cases (the problem is NP-complete).
@@ -117,9 +117,10 @@ Common impurity/cost choices at candidate split nodes:
 Practical Chapter 2 point: Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
 
 ### 8) Typical variable symbols
-- `p`: dimension of the input vector (feature index variable `j`)
-- `n`: number of data points (data index variable `i`)
-- `L`: number of distinct regions/leaves in the decision tree (leaf index variable `l`)
+- $p$: dimension of the input vector (feature index variable $j$)
+- $n$: number of data points (data index variable $i$)
+- $L$: number of decision regions/leaves in the decision tree (leaf index variable $l$)
+- $M$: number of classes in a classification problem
 
 
 ## Past exam-oriented priorities (23-25)

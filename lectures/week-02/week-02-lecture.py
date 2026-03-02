@@ -48,11 +48,11 @@ print(f"Seed set to {SEED}")
 #
 # ### 1) Supervised learning setup
 #
-# - Training data is labelled pairs: `T = {(x_i, y_i)}_{i=1}^n`.
-# - Input `x` can be high-dimensional (`p` features).
-# - Output `y` type defines the problem:
-#   - regression: `y` numerical,
-#   - classification: `y` categorical.
+# - Training data is labelled pairs: $T=\{(x_i, y_i)\}_{i=1}^n$.
+# - Input $x$ can be high-dimensional ($p$ features).
+# - Output $y$ type defines the problem:
+#   - regression: $y$ numerical,
+#   - classification: $y$ categorical.
 #
 # ### 2) Generalisation is the objective
 #
@@ -83,7 +83,7 @@ print(f"Seed set to {SEED}")
 #
 # ### 6) Decision trees (rule-based method)
 #
-# - Split input space with binary rules (`x_j < s`).
+# - Split input space with binary rules ($x_j < s$).
 # - Leaves output constant predictions:
 #   - class vote (classification),
 #   - mean value (regression).
@@ -119,9 +119,9 @@ print(f"Seed set to {SEED}")
 # Practical Chapter 2 point: Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
 #
 # ### 8) Typical variable symbols
-# - `p`: dimension of the input vector (feature index variable `j`)
-# - `n`: number of data points (data index variable `i`)
-# - `L`: number of distinct regions/leaves in the decision tree (leaf index variable `l`)
+# - $p$: dimension of the input vector (feature index variable $j$)
+# - $n$: number of data points (data index variable $i$)
+# - $L$: number of distinct regions/leaves in the decision tree (leaf index variable $l$)
 
 # %% [markdown]
 # ## Past exam-oriented priorities (23-25)
