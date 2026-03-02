@@ -93,14 +93,14 @@ Key tradeoff:
 - **Recursive binary splitting** is the heuristic algorithm for learning the tree.
   - Greedy algorithm: at each node, choose the split that gives the largest immediate reduction in loss, without revisiting earlier splits.
   - **Learning a regression tree**
-    - Each leaf node has prediction `\hat{y}_l = ave\{y_i : \mathbf{x}_i \in R_l\}` (where `l=1,\dots,L` and `i=1,\dots,n`), and the model predicts `\hat{y}(\mathbf{x}_*)` using the region containing `\mathbf{x}_*`.
-    - It is a recursive algorithm, splitting each region into left and right subregions at value `s`.
+    - Each leaf node has prediction $\hat{y}_l = \mathrm{ave}\{y_i : \mathbf{x}_i \in R_l\}$ (where $l=1,\dots,L$ and $i=1,\dots,n$), and the model predicts $\hat{y}(\mathbf{x}_*)$ using the region containing $\mathbf{x}_*$.
+    - It is a recursive algorithm, splitting each region into left and right subregions at value $s$.
     - A step is as follows:
-      - Iterate through each feature `j` and candidate split `s`, creating `R_1(j,s)=\{\mathbf{x}\mid x_j < s\}` and `R_2(j,s)=\{\mathbf{x}\mid x_j \ge s\}`.
-      - Compute associated region predictions `\hat{y}_1` and `\hat{y}_2` as region averages.
+      - Iterate through each feature $j$ and candidate split $s$, creating $R_1(j,s)=\{\mathbf{x}\mid x_j < s\}$ and $R_2(j,s)=\{\mathbf{x}\mid x_j \ge s\}$.
+      - Compute associated region predictions $\hat{y}_1$ and $\hat{y}_2$ as region averages.
       - **Loss function:** a scalar objective measuring prediction error; for regression trees, use squared error:
-        `\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2`.
-      - Select `j,s` that minimise this squared-error objective.
+        $\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2$.
+      - Select $j,s$ that minimise this squared-error objective.
 - Stopping the tree growth can be done numerous ways:
   - Define L
   - Define minimum or maximum points per region
@@ -193,13 +193,13 @@ Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_
   - (c) The offset term in linear regression, θ0 .
   - (d) The filter size in a convolutional neural network layer.
 - Question 6. A commonly used loss function in machine learning is given by: ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part A)
-  - ```text
-    A commonly used loss function in machine learning is given by:
-                                                           (
-                                                             0 if ŷ = y.
-                                   L(y, ŷ) = I{ŷ ̸= y} =
-                                                             1 if ŷ ̸= y.
-    ```
+  - $$
+    L(y,\hat{y}) = I\{\hat{y}\ne y\} =
+    \begin{cases}
+    0, & \hat{y} = y\\
+    1, & \hat{y} \ne y
+    \end{cases}
+    $$
   - This is known as the:
   - (a) Misclassification loss.
   - (b) Mean squared error.
