@@ -44,7 +44,7 @@ print(f"Seed set to {SEED}")
 # %% [markdown]
 # ## Chapter 2 summary (Lindholm): what matters most
 #
-# Supervised learning is a catagory of machine learning where all training data has associated output labels. The model is then trained to predict an output from an unknown input value.
+# Supervised learning is a category of machine learning where all training data has associated output labels. The model is then trained to predict an output from an unseen input value.
 #
 # ### 1) Supervised learning setup
 #
@@ -61,27 +61,27 @@ print(f"Seed set to {SEED}")
 #
 # ### 3) Parametric/non-parametric methods
 # - **Non-parametric methods** use the training data for making predictions
-# - **Parmetric methods** use a model governed by a fixed number of parameters.
+# - **Parametric methods** use a model governed by a fixed number of parameters.
 #
-# ### 3) k-NN classifier (distance-based non-parametric method)
+# ### 4) k-NN classifier (distance-based non-parametric method)
 #
 # - Predict using nearby training points in input space.
 # - Classification: majority vote among the `k` nearest neighbours.
 # - Regression: average of neighbour targets.
 # - `k` is a **hyperparameter** (chosen by user, not learned directly).
-# - A **decision boundary** for a classifyer is the point in the input space where the class prediction abruptly changes.
+# - A **decision boundary** for a classifier is the point in the input space where the class prediction changes.
 #
 # Key tradeoff:
 # - small `k` (especially `k=1`) -> very flexible, often overfits,
 # - large `k` -> smoother, can underfit.
 #
 # ### 5) Input normalisation
-# - Input data needs to be normalised otherwise certain input dimensions will dominate the results
+# - Input data should be normalised; otherwise certain input dimensions can dominate distance calculations in `k`-NN.
 # - Two methods
-#   - [codex complete from lindholm]
-#   - [codex complete from lindholm]
+#   - **Standardisation (z-score):** subtract the training-set mean and divide by the training-set standard deviation for each feature.
+#   - **Min-max scaling:** map each feature into a fixed range (often `[0, 1]`) using training-set minimum and maximum values.
 #
-# ### 4) Decision trees (rule-based method)
+# ### 6) Decision trees (rule-based method)
 #
 # - Split input space with binary rules (`x_j < s`).
 # - Leaves output constant predictions:
@@ -91,24 +91,25 @@ print(f"Seed set to {SEED}")
 #   - **leaf nodes** are the end points of the branching which are different regions of the input space.
 #   - **internal nodes** are the internal splits of the tree.
 #   - **branches** are the lines connecting the nodes.
-# - Searching through all possible binary trees is not possible for any practicle case (the problem is NP-complete)
+# - Searching through all possible binary trees is not possible in practical cases (the problem is NP-complete).
 # - **Recursive binary splitting** is the heuristic algorithm for learning the tree.
-#   - Greedy algorithm: [codex give a short one sentence explaination]
+#   - Greedy algorithm: at each node, choose the split that gives the largest immediate reduction in loss, without revisiting earlier splits.
 #   - **Learning a regression tree**
-#     - Each leaf node will have a predicted output y_hat_l = av{y_i : **x_i** [belongs to] R_l} (where l is leaf node 1,2,...,L, i is the data point 1,2,...,n) and will by the model predicted output y_hat(x_star) where x_star [belongs to] that regions R_l.
-#     - Its a recursive algorithm, splitting each region into left and right areas at value s
+#     - Each leaf node has prediction `\hat{y}_l = ave\{y_i : \mathbf{x}_i \in R_l\}` (where `l=1,\dots,L` and `i=1,\dots,n`), and the model predicts `\hat{y}(\mathbf{x}_*)` using the region containing `\mathbf{x}_*`.
+#     - It is a recursive algorithm, splitting each region into left and right subregions at value `s`.
 #     - A step is as follows:
-#       - We iterate through combinations of each dimension, j, and all values of that dimension that splits the space, s. This will create regions R_1 (j,s) = {**x**|x_j < s} and R_2(j,s) = {**x**|x_j >= x}.
-#       - This will give us associated regions y_hat_1 and y_hat_2 (calcuated as before)
-#       - **Loss function** is [codex give a one sentence def]. We use the squared error as a loss function [codex add formula 2.5]
-#       - To find the optimal split we select j and s that minimise the square error.
+#       - Iterate through each feature `j` and candidate split `s`, creating `R_1(j,s)=\{\mathbf{x}\mid x_j < s\}` and `R_2(j,s)=\{\mathbf{x}\mid x_j \ge s\}`.
+#       - Compute associated region predictions `\hat{y}_1` and `\hat{y}_2` as region averages.
+#       - **Loss function:** a scalar objective measuring prediction error; for regression trees, use squared error:
+#         `\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2`.
+#       - Select `j,s` that minimise this squared-error objective.
 # - Stopping the tree growth can be done numerous ways:
 #   - Define L
 #   - Define minimum or maximum points per region
 #   - Limiting the maximum tree depth
 # - Trees are also non-linear and piecewise-constant predictors.
 #
-# ### 5) Split criteria for classification trees
+# ### 7) Split criteria for classification trees
 #
 # Common impurity/cost choices at candidate split nodes:
 # - misclassification rate,
@@ -117,10 +118,10 @@ print(f"Seed set to {SEED}")
 #
 # Practical Chapter 2 point: Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
 #
-# ### 6) Typical variable symbols
-# p, dimension of the input vector, variable j
-# n, number of data points, variable i
-# L, number of distinct regions in the decision tree, variable l
+# ### 8) Typical variable symbols
+# - `p`: dimension of the input vector (feature index variable `j`)
+# - `n`: number of data points (data index variable `i`)
+# - `L`: number of distinct regions/leaves in the decision tree (leaf index variable `l`)
 
 # %% [markdown]
 # ## Past exam-oriented priorities (23-25)
@@ -194,10 +195,13 @@ print(f"Seed set to {SEED}")
 #   - (c) The offset term in linear regression, θ0 .
 #   - (d) The filter size in a convolutional neural network layer.
 # - Question 6. A commonly used loss function in machine learning is given by: ([2025 exam PDF](../../references/2025_COMP4702_exam.pdf), Part A)
-#   - (
-#       0 if ŷ = y.
-#     L(y, ŷ) = I{ŷ ̸= y} =
-#       1 if ŷ ̸= y.
+#   - ```text
+#     A commonly used loss function in machine learning is given by:
+#                                                            (
+#                                                              0 if ŷ = y.
+#                                    L(y, ŷ) = I{ŷ ̸= y} =
+#                                                              1 if ŷ ̸= y.
+#     ```
 #   - This is known as the:
 #   - (a) Misclassification loss.
 #   - (b) Mean squared error.
