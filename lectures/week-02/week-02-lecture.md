@@ -93,8 +93,17 @@ Key tradeoff:
 - **Recursive binary splitting** is the heuristic algorithm for learning the tree.
   - Greedy algorithm: [codex give a short one sentence explaination]
   - **Learning a regression tree**
-    - Each leaf node will have a predicted out put y_hat_l = av{y_i : **x_i** [belongs to] R_l}, where l is leaf node 1,2,...,L, i is the data point 1,2,...,n
-    - It will search through each 
+    - Each leaf node will have a predicted output y_hat_l = av{y_i : **x_i** [belongs to] R_l} (where l is leaf node 1,2,...,L, i is the data point 1,2,...,n) and will by the model predicted output y_hat(x_star) where x_star [belongs to] that regions R_l.
+    - Its a recursive algorithm, splitting each region into left and right areas at value s
+    - A step is as follows:
+      - We iterate through combinations of each dimension, j, and all values of that dimension that splits the space, s. This will create regions R_1 (j,s) = {**x**|x_j < s} and R_2(j,s) = {**x**|x_j >= x}.
+      - This will give us associated regions y_hat_1 and y_hat_2 (calcuated as before)
+      - **Loss function** is [codex give a one sentence def]. We use the squared error as a loss function [codex add formula 2.5]
+      - To find the optimal split we select j and s that minimise the square error.
+- Stopping the tree growth can be done numerous ways:
+  - Define L
+  - Define minimum or maximum points per region
+  - Limiting the maximum tree depth
 - Trees are also non-linear and piecewise-constant predictors.
 
 ### 5) Split criteria for classification trees
