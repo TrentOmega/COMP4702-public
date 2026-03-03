@@ -318,15 +318,8 @@ Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_
 ### Past exam answers
 -2023: Part A Q4: a, Q5: d, Part B Q1a: if s<0.7 y=blue, else y=green
 -2024: Part A Q2: b, Part B Q1a: if x_2 < e_1 notfamily, else x_2 < e_2 (if x_1 < p_2 (if x_1 < p1 notfamily, else family) else notfamily) else notfamily
-            x_2 < e_1 
-            /       \
-        !famcar   x_2 < e_2
-                  /       \
-            x_1 < p_2   !famcar
-            /       \
-        x_1 < p1   !famcar
-        /       \
-    !famcar   famcar
+
+![2024 Exam Part B Q1a answer](figures/exam-2024-answer-B-Q1a.png)
 
 -2024 Part B cont: Q1c: k=1 to k=9 gives family car, k=10 coinflip, k>10 gives not family car.
 
