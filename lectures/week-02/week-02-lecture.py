@@ -254,12 +254,10 @@ print(f"Seed set to {SEED}")
 #   - (d) Sensitivity.
 # - Question 1(a) (Part B): ([2023 exam PDF](../../references/2023_COMP4702_exam.pdf), Part B)
 #   - (a) Consider using a decision stump (i.e. a decision tree with depth = 1) to classify this data.
-#     (i) From Figure 1, specify the trained model (approximately) in terms of an IF...THEN decision
-#     rule.                                                                           (2 marks)
-#   - (ii) State the misclassification rate of the trained model on the training set and explain
-#     why.                                                                               (2 marks)
+#     - (i) From Figure 1, specify the trained model (approximately) in terms of an IF...THEN decision rule.                                                                           (2 marks)
+#     - (ii) State the misclassification rate of the trained model on the training set and explain why.                                                                               (2 marks)
 #
-# ![2023 exam Figure 1 (Part B Q1)](figures/exam-2023-fig-1-B-Q1.png)
+#   ![2023 exam Figure 1 (Part B Q1)](figures/exam-2023-fig-1-B-Q1.png)
 #
 # ### 2024 exam
 #
@@ -269,18 +267,16 @@ print(f"Seed set to {SEED}")
 #   - (c) The learning rate parameter.
 #   - (d) The number of base models that are combined to produce the final output.
 # - Question 1(a) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
-#   - (a) A decision tree is trained on this data and creates the discriminant function/decision boundary
-#     shown by the shaded rectangle, C. Draw a diagram of this decision tree, including the rule/decision
-#     made at each node and the final classification at each leaf node.                        (4 marks)
+#   - (a) A decision tree is trained on this data and creates the discriminant function/decision boundary shown by the shaded rectangle, C. Draw a diagram of this decision tree, including the rule/decision made at each node and the final classification at each leaf node.                        (4 marks)
 #
-# ![2024 exam Figure 1 (Part B Q1)](figures/exam-2024-fig-1-B-Q1.png)
+#   ![2024 exam Figure 1 (Part B Q1)](figures/exam-2024-fig-1-B-Q1.png)
 # - Question 1(c) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
 #   - (c) Consider using k-nearest neighbour to classify the data in Figure 1. If a test point x⋆ was located at
 #     the centre of the shaded rectangle, describe how the prediction would change for different possible
 #     k values.                                                                                   (4 marks)
 # - Question 2(b) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
-#   - (b) Explain the general relationship between underfitting, overfitting and model complexity in super-
-#     vised learning. You should refer to Figure 2 to assist with your explanation.          (6 marks)
+#   - (b) Explain the general relationship between underfitting, overfitting and model complexity in supervised learning. You should refer to Figure 2 to assist with your explanation.         (6 marks)
+#   ![2024 exam Figure 2 (Part B Q2)](figures/exam-2024-fig-2-B-Q2.png)
 #
 # ### 2025 exam
 #
@@ -323,6 +319,18 @@ print(f"Seed set to {SEED}")
 #
 # ### Past exam answers
 # -2023: Part A Q4: a, Q5: d, Part B Q1a: if s<0.7 y=blue, else y=green
+# -2024: Part A Q2: b, Part B Q1a: if x_2 < e_1 notfamily, else x_2 < e_2 (if x_1 < p_2 (if x_1 < p1 notfamily, else family) else notfamily) else notfamily
+#             x_2 < e_1 
+#             /       \
+#         !famcar   x_2 < e_2
+#                   /       \
+#             x_1 < p_2   !famcar
+#             /       \
+#         x_1 < p1   !famcar
+#         /       \
+#     !famcar   famcar
+#
+# -2024 Part B cont: Q1c: k=1 to k=9 gives family car, k=10 coinflip, k>10 gives not family car.
 #
 # ## Toy example 1: `k`-NN from scratch (classification)
 #
