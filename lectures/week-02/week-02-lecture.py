@@ -92,33 +92,30 @@ print(f"Seed set to {SEED}")
 #   - **internal nodes** are the internal splits of the tree.
 #   - **branches** are the lines connecting the nodes.
 # - Searching through all possible binary trees is not possible in practical cases (the problem is NP-complete).
-# - **Recursive binary splitting** is the heuristic algorithm for learning the tree.
-#   - Greedy algorithm: at each node, choose the split that gives the largest immediate reduction in loss, without revisiting earlier splits.
-#   - **Learning a regression tree**
-#     - Each leaf node has prediction $\hat{y}_l = \mathrm{ave}\{y_i : \mathbf{x}_i \in R_l\}$ (where $l=1,\dots,L$ and $i=1,\dots,n$), and the model predicts $\hat{y}(\mathbf{x}_*)$ using the region containing $\mathbf{x}_*$.
-#     - It is a recursive algorithm, splitting each region into left and right subregions at value $s$.
-#     - A step is as follows:
-#       - Iterate through each feature $j$ and candidate split $s$, creating $R_1(j,s)=\{\mathbf{x}\mid x_j < s\}$ and $R_2(j,s)=\{\mathbf{x}\mid x_j \ge s\}$.
-#       - Compute associated region predictions $\hat{y}_1$ and $\hat{y}_2$ as region averages.
-#       - **Loss function:** a scalar objective measuring prediction error; for regression trees, use squared error:
-#         $\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2$.
-#       - Select $j,s$ that minimise this squared-error objective.
+# - **Recursive binary splitting** is the heuristic algorithm for learning the tree. It uses a greedy algorithm: at each node, choose the split that gives the largest immediate reduction in loss, without revisiting earlier splits.
+# - **Learning a regression tree**
+#   - Each leaf node has prediction $\hat{y}_l = \mathrm{ave}\{y_i : \mathbf{x}_i \in R_l\}$ (where $l=1,\dots,L$ and $i=1,\dots,n$), and the model predicts $\hat{y}(\mathbf{x}_*)$ using the region containing $\mathbf{x}_*$.
+#   - It is a recursive algorithm, splitting each region into left and right subregions at value $s$.
+#   - A step is as follows:
+#     - Iterate through each feature $j$ and candidate split $s$, creating $R_1(j,s)=\{\mathbf{x}\mid x_j < s\}$ and $R_2(j,s)=\{\mathbf{x}\mid x_j \ge s\}$.
+#     - Compute associated region predictions $\hat{y}_1$ and $\hat{y}_2$ as region averages.
+#     - **Loss function:** a scalar objective measuring prediction error; for regression trees, use squared error:
+#       $\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2$.
+#     - Select $j,s$ that minimise this squared-error objective.
+# - **Learning a classifcation tree**
+#   - Each leaf node has a prediction $\hat{y}_l = \mathrm{MajorityVote}\{y_i : \mathbf{x}_i \in R_l\}$, opposed the the averaged function of numerical outputs.
+#   - We need a new a new loss function (squared error doesn't work for classification). It is of the form [codex put in (2.6)], with $Q_1$ and $Q_2$ are the costs for the left and right decision regions. We then have three differnt methods for determing the costs:
+#     - Misclassifcation rate, [codex add (2.7a)]
+#     - Gini index, [codex add (2.7b)]
+#     - Entropy criterion, [add (2.7c)]
+#   - Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
 # - Stopping the tree growth can be done numerous ways:
 #   - Define L
 #   - Define minimum or maximum points per region
 #   - Limiting the maximum tree depth
 # - Trees are also non-linear and piecewise-constant predictors.
 #
-# ### 7) Split criteria for classification trees
-#
-# Common impurity/cost choices at candidate split nodes:
-# - misclassification rate,
-# - Gini index,
-# - entropy.
-#
-# Practical Chapter 2 point: Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
-#
-# ### 8) Typical variable symbols
+# ### 7) Typical variable symbols
 # - $p$: dimension of the input vector (feature index variable $j$)
 # - $n$: number of data points (data index variable $i$)
 # - $L$: number of decision regions/leaves in the decision tree (leaf index variable $l$)
