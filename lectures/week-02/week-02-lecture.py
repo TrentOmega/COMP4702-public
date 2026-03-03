@@ -88,7 +88,7 @@ print(f"Seed set to {SEED}")
 #   - class vote (classification),
 #   - mean value (regression).
 # - Definitions:
-#   - **leaf nodes** are the end points of the branching which are different regions of the input space.
+#   - **leaf nodes** are the end points of the branching which are decision regions of the input space.
 #   - **internal nodes** are the internal splits of the tree.
 #   - **branches** are the lines connecting the nodes.
 # - Searching through all possible binary trees is not possible in practical cases (the problem is NP-complete).
@@ -121,7 +121,8 @@ print(f"Seed set to {SEED}")
 # ### 8) Typical variable symbols
 # - $p$: dimension of the input vector (feature index variable $j$)
 # - $n$: number of data points (data index variable $i$)
-# - $L$: number of distinct regions/leaves in the decision tree (leaf index variable $l$)
+# - $L$: number of decision regions/leaves in the decision tree (leaf index variable $l$)
+# - $M$: number of classes in a classification problem (class index variable $m$)
 
 # %% [markdown]
 # ## Past exam-oriented priorities (23-25)

@@ -120,7 +120,7 @@ Practical Chapter 2 point: Gini/entropy are often preferred for splitting becaus
 - $p$: dimension of the input vector (feature index variable $j$)
 - $n$: number of data points (data index variable $i$)
 - $L$: number of decision regions/leaves in the decision tree (leaf index variable $l$)
-- $M$: number of classes in a classification problem
+- $M$: number of classes in a classification problem (class index variable $m$)
 
 
 ## Past exam-oriented priorities (23-25)
