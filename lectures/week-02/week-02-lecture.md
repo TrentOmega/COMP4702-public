@@ -15,7 +15,7 @@ jupyter:
     name: python3
 ---
 
-# Week 2 Lecture Notes: Lindholm Chapter 2 (Exam-Focused)
+# Week 2 Lecture Notes: Lindholm Chapter 2
 
 ## Scope for Week 2
 
@@ -29,6 +29,89 @@ jupyter:
 1. Explain Chapter 2 concepts clearly in ML language.
 2. Prioritise concepts that repeatedly appear in 2023, 2024, and 2025 exams.
 3. Build intuition with small, reproducible Python toy examples.
+
+## Week 2 lecture summary
+
+### Opening framing
+
+- Marcus Gallagher positioned Week 2 as a gentle supervised-learning introduction.
+  - Core setup: learn from labelled pairs $(x_i, y_i)$.
+  - Goal: predict outputs for unseen inputs.
+  - Early emphasis: model usefulness is about generalisation, not memorising training data.
+
+### Problem types and intuition examples
+
+- He separated supervised tasks into classification and regression.
+  - Classification: categorical outputs/classes.
+  - Regression: numeric/continuous outputs.
+- He used simple low-dimensional visual examples to show real datasets are often not perfectly separable.
+  - Figure used in class: 2D song-classification scatter (length vs energy) with three classes (Beatles/Kiss/Bob Dylan); used to show overlap and non-separability.<sup>[1](#sources-used), [2](#sources-used)</sup>
+  ![Lindholm Figure 2.1: song classification scatter](figures/lindholm-fig-2.1.png)
+  - Figure used in class: stopping-distance regression scatter (speed vs stopping distance) with fitted-function intuition.<sup>[1](#sources-used), [2](#sources-used)</sup>
+  ![Lindholm Figure 2.2: stopping-distance regression scatter](figures/lindholm-fig-2.2.png)
+
+### k-NN segment
+
+- He introduced `k`-NN as a simple, interpretable baseline method.
+  - Classification prediction: neighbour vote.
+  - Regression prediction: neighbour average.
+  - Complexity control: `k` as the key hyperparameter.
+    - Small `k`: overfit/high-variance risk.
+    - Large `k`: underfit/high-bias risk.
+- He highlighted interpolation/extrapolation behaviour, especially boundary risk outside the data support.
+- He emphasized feature scaling before distance calculations.
+  - Min-max normalisation.
+  - Z-score standardisation.
+  - Diagram used in class: k-NN regression comparison across `k` (small `k` jagged fit vs larger `k` smoother fit), including edge/boundary behaviour.<sup>[1](#sources-used), [2](#sources-used)</sup>
+  ![Lindholm Figure 2.3: k-NN colour-classification intuition](figures/lindholm-fig-2.3-knn-colours.png)
+  ![Lindholm Figure 2.4: k-NN decision boundaries](figures/lindholm-fig-2.4-knn-boundaries.png)
+
+### Decision tree segment
+
+- He introduced decision trees as hierarchical if-then binary splits.
+  - Axis-aligned regions in input space.
+  - Transparent root-to-leaf decision paths.
+- He framed tree learning as recursive binary splitting (greedy).
+  - Split quality discussion covered entropy/Gini/misclassification context.
+  - Overfitting warning: growth constraints/stopping criteria are necessary.
+- He began worked split calculations and deferred continuation to the next lecture.
+  - Diagrams used in class:
+    - tree-structure prediction diagram (root/internal/leaf traversal),
+    - axis-aligned partition plot in 2D,
+    - candidate split illustration with entropy-based selection.
+
+### 1. Session Focus
+
+- Define supervised learning setup and output types (classification vs regression).
+- Build intuition for model behaviour using simple geometric examples.
+- Introduce `k`-NN and decision trees as core Week 2 methods.
+- Connect model complexity decisions (`k`, tree growth) to generalisation.
+
+### 2. What Marcus Gallagher Emphasized
+
+- Generalisation matters more than perfect training-set fit.
+- Simple/interpretable methods remain valuable in real practice.
+- `k`-NN requires careful feature scaling.
+- Extrapolation is riskier than interpolation.
+- Decision tree training is greedy and needs stopping constraints.
+
+### 3. Core Concepts and Methods
+
+- Supervised data notation: $T=\{(x_i, y_i)\}_{i=1}^n$.
+- Task types:
+  - classification: discrete class label prediction,
+  - regression: continuous-value prediction.
+- `k`-NN:
+  - classify by nearest-neighbour vote,
+  - regress by nearest-neighbour average,
+  - tune `k` as a hyperparameter controlling smoothness/complexity.
+- Feature scaling for distance metrics:
+  - min-max normalisation,
+  - z-score standardisation.
+- Decision trees:
+  - binary threshold splits,
+  - piecewise-constant leaf predictions,
+  - recursive greedy split selection using impurity/loss criteria.
 
 ```python
 import random
@@ -109,9 +192,9 @@ Key tradeoff:
     \arg \min_{j,s} \; n_1 Q_1 + n_2 Q_2
     $$
     where $Q_1$ and $Q_2$ are impurity costs for left/right regions, and $n_1,n_2$ are their sample counts.
-  - We introduce a new term $\hat{\pi}_{\ell m}$ to be the propertion of training observations in the $\ell$th region that belong to the $m$th class.
+  - We introduce a new term $\hat{\pi}_{\ell m}$ to be the propertion of training observations in the $\ell$ th region that belong to the $m$ th class.
   - Common impurity choices:
-    - Misclassification rate: $Q_\ell = 1 - \displaystyle:1-\displaystyle\max_{m} \hat{\pi}_{\ell m}$
+    - Misclassification rate: $Q_\ell = 1-\displaystyle\max_{m} \hat{\pi}_{\ell m}$
     - Gini index: $Q_\ell = \sum_{m=1}^{M} \hat{\pi}_{\ell m}(1-\hat{\pi}_{\ell m}) = 1 - \sum_{m=1}^{M}\hat{\pi}_{\ell m}^2$
     - Entropy criterion: $Q_\ell = -\sum_{m=1}^{M} \hat{\pi}_{\ell m} \log \hat{\pi}_{\ell m}$
   - Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
@@ -174,6 +257,8 @@ Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_
   - (ii) State the misclassification rate of the trained model on the training set and explain
     why.                                                                               (2 marks)
 
+![2023 exam Figure 1 (Part B Q1)](figures/exam-2023-fig-1-B-Q1.png)
+
 ### 2024 exam
 
 - Question 2. In the k-nearest neighbours method (k-NN), k refers to: ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part A)
@@ -185,6 +270,8 @@ Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_
   - (a) A decision tree is trained on this data and creates the discriminant function/decision boundary
     shown by the shaded rectangle, C. Draw a diagram of this decision tree, including the rule/decision
     made at each node and the final classification at each leaf node.                        (4 marks)
+
+![2024 exam Figure 1 (Part B Q1)](figures/exam-2024-fig-1-B-Q1.png)
 - Question 1(c) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
   - (c) Consider using k-nearest neighbour to classify the data in Figure 1. If a test point x⋆ was located at
     the centre of the shaded rectangle, describe how the prediction would change for different possible
@@ -231,6 +318,9 @@ Note: These are copied from the exam text extraction file: [COMP4702_exams_2023_
 - First pass: answer each question without notes.
 - Second pass: map each question to one Chapter 2 skill (`k`-NN intuition, tree split criteria, misclassification/confusion matrix, overfitting-underfitting).
 - Third pass: redo any question you missed and write a one-line error diagnosis (concept gap, arithmetic slip, or interpretation mistake).
+
+### Past exam answers
+-2023: Part A Q4: a, Q5: d, Part B Q1a: if s<0.7 y=blue, else y=green
 
 ## Toy example 1: `k`-NN from scratch (classification)
 
@@ -396,8 +486,9 @@ print("Reproducible run check (seed fixed):", SEED)
 
 ## Sources used
 
-- `references/CourseSummaryTable_v1_26.pdf`
-- `references/main-text-book-machine-learning-lindholm-2022.pdf` (Chapter 2)
-- `references/2023_COMP4702_exam.pdf`
-- `references/2024_COMP4702_exam.pdf`
-- `references/2025_COMP4702_exam.pdf`
+- [1] [Lindholm textbook (Chapter 2)](../../references/main-text-book-machine-learning-lindholm-2022.pdf)
+- [2] [MATLAB lecture notes 2026](../../references/lecture_notes_matlab_2026_v1.pdf)
+- [3] [Course summary table v1.26](../../references/CourseSummaryTable_v1_26.pdf)
+- [4] [2023 exam PDF](../../references/2023_COMP4702_exam.pdf)
+- [5] [2024 exam PDF](../../references/2024_COMP4702_exam.pdf)
+- [6] [2025 exam PDF](../../references/2025_COMP4702_exam.pdf)
