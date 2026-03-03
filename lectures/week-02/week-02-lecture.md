@@ -91,7 +91,9 @@ Key tradeoff:
   - **branches** are the lines connecting the nodes.
 - Searching through all possible binary trees is not possible in practical cases (the problem is NP-complete).
 - **Recursive binary splitting** is the heuristic algorithm for learning the tree. It uses a greedy algorithm: at each node, choose the split that gives the largest immediate reduction in loss, without revisiting earlier splits.
-- **Learning a regression tree**
+- Trees are also non-linear and piecewise-constant predictors.
+
+#### a) Learning a regression tree
   - Each leaf node has prediction $\hat{y}_l = \mathrm{ave}\{y_i : \mathbf{x}_i \in R_l\}$ (where $l=1,\dots,L$ and $i=1,\dots,n$), and the model predicts $\hat{y}(\mathbf{x}_*)$ using the region containing $\mathbf{x}_*$.
   - It is a recursive algorithm, splitting each region into left and right subregions at value $s$.
   - A step is as follows:
@@ -100,18 +102,26 @@ Key tradeoff:
     - **Loss function:** a scalar objective measuring prediction error; for regression trees, use squared error:
       $\sum_{x_i \in R_1(j,s)}(y_i-\hat{y}_1)^2 + \sum_{x_i \in R_2(j,s)}(y_i-\hat{y}_2)^2$.
     - Select $j,s$ that minimise this squared-error objective.
-- **Learning a classifcation tree**
-  - Each leaf node has a prediction $\hat{y}_l = \mathrm{MajorityVote}\{y_i : \mathbf{x}_i \in R_l\}$, opposed the the averaged function of numerical outputs.
-  - We need a new a new loss function (squared error doesn't work for classification). It is of the form [codex put in (2.6)], with $Q_1$ and $Q_2$ are the costs for the left and right decision regions. We then have three differnt methods for determing the costs:
-    - Misclassifcation rate, [codex add (2.7a)]
-    - Gini index, [codex add (2.7b)]
-    - Entropy criterion, [add (2.7c)]
+#### b) Learning a classification tree
+  - Each leaf node has a prediction $\hat{y}_l = \mathrm{MajorityVote}\{y_i : \mathbf{x}_i \in R_l\}$, instead of the averaged prediction used for numerical regression outputs.
+  - We need a classification split-cost function (squared error does not apply). The general optimisation problem is of the form:
+    $$
+    \arg \min_{j,s} \; n_1 Q_1 + n_2 Q_2
+    $$
+    where $Q_1$ and $Q_2$ are impurity costs for left/right regions, and $n_1,n_2$ are their sample counts.
+  - We introduce a new term $\hat{\pi}_{\ell m}$ to be the propertion of training observations in the $\ell$th region that belong to the $m$th class.
+  - Common impurity choices:
+    - Misclassification rate: $Q_\ell = 1 - \displaystyle:1-\displaystyle\max_{m} \hat{\pi}_{\ell m}$
+    - Gini index: $Q_\ell = \sum_{m=1}^{M} \hat{\pi}_{\ell m}(1-\hat{\pi}_{\ell m}) = 1 - \sum_{m=1}^{M}\hat{\pi}_{\ell m}^2$
+    - Entropy criterion: $Q_\ell = -\sum_{m=1}^{M} \hat{\pi}_{\ell m} \log \hat{\pi}_{\ell m}$
   - Gini/entropy are often preferred for splitting because they are more sensitive to node purity changes than misclassification rate.
-- Stopping the tree growth can be done numerous ways:
-  - Define L
-  - Define minimum or maximum points per region
-  - Limiting the maximum tree depth
-- Trees are also non-linear and piecewise-constant predictors.
+
+  #### c) Stopping the tree growth
+  - Is required otherwise the model will overfit the data
+  - Some examples of stopping the growth are:
+    - Define $L$
+    - Define minimum or maximum points per region
+    - Limiting the maximum tree depth
 
 ### 7) Typical variable symbols
 - $p$: dimension of the input vector (feature index variable $j$)
