@@ -274,9 +274,6 @@ print(f"Seed set to {SEED}")
 #   - (c) Consider using k-nearest neighbour to classify the data in Figure 1. If a test point x⋆ was located at
 #     the centre of the shaded rectangle, describe how the prediction would change for different possible
 #     k values.                                                                                   (4 marks)
-# - Question 2(b) (Part B): ([2024 exam PDF](../../references/2024_COMP4702_exam.pdf), Part B)
-#   - (b) Explain the general relationship between underfitting, overfitting and model complexity in supervised learning. You should refer to Figure 2 to assist with your explanation.         (6 marks)
-#   ![2024 exam Figure 2 (Part B Q2)](figures/exam-2024-fig-2-B-Q2.png)
 #
 # ### 2025 exam
 #
