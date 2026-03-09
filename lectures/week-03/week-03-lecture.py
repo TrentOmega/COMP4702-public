@@ -61,7 +61,9 @@ print(f"Seed set to {SEED}")
 #
 # ### One-sentence definition
 #
-# A Gaussian mixture model is a generative model that represents the joint distribution as
+# A **generative model** learns how the data is distributed, jointly across inputs and outputs $p(x,y)$, while a **discriminative model** learns only how to predict the output from a given input $p(y|x)$.
+#
+# A **Gaussian mixture model (GMM)** is a generative model that represents the joint distribution as
 # $$
 # p(x, y) = p(x \mid y)p(y),
 # $$
