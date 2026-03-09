@@ -18,6 +18,34 @@
 # %% [markdown]
 # # Week 2 Lecture Notes: Lindholm Chapter 2
 #
+# ## Contents
+#
+# - [Scope for Week 2](#scope-for-week-2)
+# - [Learning goals for this notebook](#learning-goals-for-this-notebook)
+# - [Week 2 lecture summary](#week-2-lecture-summary)
+#   - [Opening framing](#opening-framing)
+#   - [Problem types and intuition examples](#problem-types-and-intuition-examples)
+#   - [k-NN segment](#k-nn-segment)
+#   - [Decision tree segment](#decision-tree-segment)
+#   - [Session Focus](#1-session-focus)
+#   - [What Marcus Gallagher Emphasized](#2-what-marcus-gallagher-emphasized)
+#   - [Core Concepts and Methods](#3-core-concepts-and-methods)
+# - [Chapter 2 summary](#chapter-2-summary)
+#   - [Supervised learning setup](#1-supervised-learning-setup)
+#   - [Generalisation is the objective](#2-generalisation-is-the-objective)
+#   - [Parametric/non-parametric methods](#3-parametricnon-parametric-methods)
+#   - [k-NN classifier (distance-based non-parametric method)](#4-k-nn-classifier-distance-based-non-parametric-method)
+#   - [Input normalisation](#5-input-normalisation)
+#   - [Decision trees (rule-based method)](#6-decision-trees-rule-based-method)
+#   - [Typical variable symbols](#7-typical-variable-symbols)
+# - [Past exam-oriented priorities (23-25)](#past-exam-oriented-priorities-23-25)
+# - [Past Exam Questions (23-25)](#past-exam-questions-23-25)
+# - [Toy example 1: `k`-NN from scratch (classification)](#toy-example-1-k-nn-from-scratch-classification)
+# - [Toy example 2: decision-tree split criteria on one candidate node](#toy-example-2-decision-tree-split-criteria-on-one-candidate-node)
+# - [Toy example 3: decision stump + confusion matrix](#toy-example-3-decision-stump--confusion-matrix)
+# - [Week 2 wrap-up (what to remember)](#week-2-wrap-up-what-to-remember)
+# - [Sources used](#sources-used)
+#
 # ## Scope for Week 2
 #
 # - Topic: supervised learning.
@@ -125,7 +153,7 @@ print(f"Seed set to {SEED}")
 
 
 # %% [markdown]
-# ## Chapter 2 summary (Lindholm): what matters most
+# ## Chapter 2 summary
 #
 # Supervised learning is a category of machine learning where all training data has associated output labels. The model is then trained to predict an output from an unseen input value.
 #
