@@ -50,7 +50,7 @@ $$
 x = (x_1, x_2, \dots, x_T).
 $$
 
-An LLM models the joint probability of the whole sequence using the chain rule:
+An LLM models the joint probability of the whole sequence using the chain rule. This decomposition is exact, not an approximation. The modelling choice is in how each conditional $p(x_t \mid x_{<t})$ is parameterised, for example with a transformer:
 
 $$
 p(x_1, x_2, \dots, x_T)
@@ -121,6 +121,8 @@ the model might assign:
 - `salt` = 0.01
 
 Likely continuations get higher probability; unlikely or nonsensical continuations get lower probability.
+
+To actually generate text, the model samples from this distribution at each step. Controls like temperature (scaling the logits to sharpen or flatten the distribution) and top-k/top-p (restricting which tokens are eligible) shape how deterministic or creative the output is.
 
 ## Practical takeaway
 
