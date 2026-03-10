@@ -17,6 +17,23 @@ jupyter:
 
 # Week 3 Lecture Notes: Unsupervised, Semi-supervised, and Generative Models
 
+## Contents
+
+- [Scope for Week 3](#scope-for-week-3)
+- [Learning goals for this notebook](#learning-goals-for-this-notebook)
+- [Chapter 10 summary: what matters most for Week 3](#chapter-10-summary)
+  - [10.1 Gaussian mixture models and discriminant analysis](#gmm-and-discriminant-analysis)
+  - [Semi-supervised GMM and the EM idea](#semi-supervised-gmm-and-em)
+  - [10.2 Cluster analysis](#cluster-analysis)
+  - [10.4 Representation learning and dimensionality reduction](#representation-learning-and-dimensionality-reduction)
+- [Core comparisons to remember](#core-comparisons)
+- [Exam-oriented takeaways](#exam-oriented-takeaways)
+- [Past exam questions (2023-2025)](#past-exam-questions)
+- [Toy example: PCA on a tiny 2D dataset](#toy-example-pca)
+- [Minimal toy example: hard vs soft cluster assignment](#toy-example-hard-vs-soft)
+- [Week 3 revision summary](#week-3-revision-summary)
+
+<a id="scope-for-week-3"></a>
 ## Scope for Week 3
 
 - Topic: unsupervised and semi-supervised learning; introduction to generative models.
@@ -26,6 +43,7 @@ jupyter:
 - Schedule note: the course summary also lists `Hand01` Sections 6.4, 9.1, 9.2 as options, but that source is not present locally, so these notes stay grounded in Lindholm and the local course materials.
 - Prac alignment: Week 3 prac focuses on unsupervised learning.
 
+<a id="learning-goals-for-this-notebook"></a>
 ## Learning goals for this notebook
 
 1. Explain what changes when labels are missing and why generative models become useful.
@@ -42,6 +60,7 @@ np.random.seed(SEED)
 print(f"Seed set to {SEED}")
 ```
 
+<a id="chapter-10-summary"></a>
 ## Chapter 10 summary: what matters most for Week 3
 
 Week 3 is about learning useful structure from inputs even when labels are partly missing or entirely absent.
@@ -56,11 +75,12 @@ The Lindholm chapter ties these together through a generative viewpoint:
 - marginalise out the labels to get a model for $p(x)$ when labels are hidden,
 - use that model for classification, clustering, or representation learning.
 
+<a id="gmm-and-discriminant-analysis"></a>
 ## 10.1 Gaussian mixture models and discriminant analysis
 
 ### One-sentence definition
 
-A **generative model** learns how the data is distributed, jointly across inputs and outputs $p(x,y)$, while a **discriminative model** learns only how to predict the output from a given input $p(y|x)$.
+A **generative model** learns how the data is distributed, jointly across inputs and outputs $p(\mathbf{x},y)$, while a **discriminative model** learns only how to predict the output from a given input $p(y|\mathbf{x})$.
 
 A **Gaussian mixture model (GMM)** is a generative model that represents the joint distribution as
 $$
@@ -125,6 +145,7 @@ Two important special cases:
 - Covariance estimation can become unstable in high dimensions or with small class sample sizes.
 - A model can exploit unlabelled data only if its structural assumptions are at least approximately sensible.
 
+<a id="semi-supervised-gmm-and-em"></a>
 ## Semi-supervised GMM and the EM idea
 
 ### One-sentence definition
@@ -173,6 +194,7 @@ This is the practical meaning of the EM split:
 
 Conservative practical takeaway: initialise carefully, run multiple times, and do not over-interpret a single clustering result.
 
+<a id="cluster-analysis"></a>
 ## 10.2 Cluster analysis
 
 ### One-sentence definition
@@ -240,6 +262,7 @@ For `k`-means, Lindholm highlights the **elbow method**:
 
 This is only a heuristic. In unsupervised learning, "best loss" and "most useful structure" are not always the same.
 
+<a id="representation-learning-and-dimensionality-reduction"></a>
 ## 10.4 Representation learning and dimensionality reduction
 
 ### One-sentence definition
@@ -301,6 +324,7 @@ This produces two common exam statements:
 - Large-scale variables can dominate unless inputs are standardised when appropriate.
 - High explained variance does not automatically mean the representation is useful for a downstream supervised task.
 
+<a id="core-comparisons"></a>
 ## Core comparisons to remember
 
 ### GMM vs logistic regression
@@ -320,6 +344,7 @@ This produces two common exam statements:
 - Clustering looks for structure among **rows** (groups of data points).
 - PCA looks for structure among **columns/directions** (low-dimensional representation).
 
+<a id="exam-oriented-takeaways"></a>
 ## Exam-oriented takeaways
 
 Most likely Week 3 concepts to be assessed:
@@ -340,6 +365,7 @@ Fast exam checklist:
 - Can I explain PCA as "rotate/project onto directions of largest variance"?
 - Can I say what the PCA eigenvalues correspond to?
 
+<a id="past-exam-questions"></a>
 ## Past exam questions (2023-2025)
 
 These are copied from [COMP4702_exams_2023_2025.md](../../references/COMP4702_exams_2023_2025.md), selected using [exam_questions_2023_2025_by_week.csv](../../references/exam_questions_2023_2025_by_week.csv).
@@ -407,6 +433,7 @@ $$
 - 2025 Part A Q2: **(d)**
 - 2025 Part A Q9: **(b)**
 
+<a id="toy-example-pca"></a>
 ## Toy example: PCA on a tiny 2D dataset
 
 This example keeps the algebra small enough to inspect directly.
@@ -448,6 +475,7 @@ print(np.round(explained_ratio, 4))
 - The first explained-variance ratio should be close to 1 because the points lie close to a line.
 - If you keep only the first principal component, you get a strong 1D summary with little information loss.
 
+<a id="toy-example-hard-vs-soft"></a>
 ## Minimal toy example: hard vs soft cluster assignment
 
 Suppose a point lies between two cluster centres:
@@ -457,6 +485,7 @@ Suppose a point lies between two cluster centres:
 
 That single difference is the core conceptual bridge from `k`-means to EM.
 
+<a id="week-3-revision-summary"></a>
 ## Week 3 revision summary
 
 - GMMs model distributions; they do not only draw boundaries.
