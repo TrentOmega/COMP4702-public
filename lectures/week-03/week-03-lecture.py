@@ -89,6 +89,8 @@ print(f"Seed set to {SEED}")
 # $$
 # with a Gaussian distribution for each class-conditional input distribution.
 #
+# See also: [Generative Models and LLMs](./generative-models-and-llms-summary.md) for a short bridge between Week 3 generative models and autoregressive language models.
+#
 # ### Objective
 #
 # The GMM assumes

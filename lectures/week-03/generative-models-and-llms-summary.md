@@ -1,4 +1,4 @@
-# Generative Models and LLMs: Thread Summary
+# Generative Models and LLMs
 
 ## The connection between Lindholm-style generative models and LLMs
 
@@ -133,3 +133,6 @@ The conceptual bridge is:
 
 Same core idea: model the data-generating process probabilistically.
 Different parameterisation: mixture components for GMMs, autoregressive next-token conditionals for LLMs.
+
+## Acknowlegments & References:
+Back and forth discussion with GPT-5.4 & Opus-4.6 about chapter 10 of Lindholm and how it relates to LLMs.
