@@ -22,6 +22,14 @@
 #
 # - [Scope for Week 3](#scope-for-week-3)
 # - [Learning goals for this notebook](#learning-goals-for-this-notebook)
+# - [Week 3 lecture summary](#week-3-lecture-summary)
+#   - [Transition into Week 3 material](#transition-into-week-3-material)
+#   - [Why Marcus Gallagher brought generative models in early](#why-marcus-gallagher-brought-generative-models-in-early)
+#   - [Supervised GMMs as probabilistic classifiers](#supervised-gmms-as-probabilistic-classifiers)
+#   - [Semi-supervised learning and EM intuition](#semi-supervised-learning-and-em-intuition)
+#   - [Unsupervised GMMs and clustering](#unsupervised-gmms-and-clustering)
+#   - [k-means as the hard-assignment simplification](#k-means-as-the-hard-assignment-simplification)
+#   - [What slipped to next time](#what-slipped-to-next-time)
 # - [Chapter 10 summary: what matters most for Week 3](#chapter-10-summary)
 #   - [10.1 Gaussian mixture models and discriminant analysis](#gmm-and-discriminant-analysis)
 #   - [Semi-supervised GMM and the EM idea](#semi-supervised-gmm-and-em)
@@ -50,6 +58,64 @@
 # 1. Explain what changes when labels are missing and why generative models become useful.
 # 2. Understand the objective, update logic, and failure modes of GMMs, EM, `k`-means, and PCA.
 # 3. Prioritise the Week 3 ideas that have already appeared in 2023-2025 exams.
+#
+# ## Week 3 lecture summary
+#
+# ### Transition into Week 3 material
+#
+# - After a short decision-tree wrap-up from Week 2, Marcus Gallagher explicitly marked the handover to the new topic by pointing back to the Week 3 row of the course summary table.
+#   - He framed the actual Week 3 content as **unsupervised learning** with `k`-means clustering and principal component analysis as the most recognisable methods.
+#   - He also said he was deliberately pulling some material **out of the textbook order**, because he did not like leaving unsupervised learning until Chapter 10.
+#
+# ### Why Marcus Gallagher brought generative models in early
+#
+# - He motivated the topic by arguing that it is useful to learn a probabilistic model of the data distribution before worrying only about supervised prediction.
+#   - The lecture flow moved from supervised Gaussian mixture models to semi-supervised learning, then to fully unsupervised clustering.
+#   - This was a class-emphasis difference from the book order: the notes keep Lindholm Chapter 10 as the canonical reference, but the spoken lecture used these ideas earlier to build intuition.
+#
+# ### Supervised GMMs as probabilistic classifiers
+#
+# - Marcus Gallagher first presented the Gaussian mixture model as a **supervised** classifier rather than starting from clustering.
+#   - Each class is associated with a Gaussian component plus a mixture weight.
+#   - The key prediction idea is to compare the class-conditional densities and then convert them into class probabilities via Bayes' rule.
+#   - He emphasized that the output is more informative than a hard class label because the model can return probabilities for each class that sum to 1.
+#   - He pointed out that this makes the GMM a useful contrast with earlier Week 2 methods: it gives a probabilistic prediction, not just a nearest-neighbour vote or a tree leaf label.
+#   - He noted, without spending long on the algebra, that unrestricted covariances lead to **quadratic** decision boundaries, linking the method to QDA.
+#
+# ### Semi-supervised learning and EM intuition
+#
+# - He then introduced **semi-supervised learning** as the setting where some data is labelled and additional data is unlabelled.
+#   - His practical motivation was cost: in real problems, especially medical ones, labels can be expensive because experts must produce them, while unlabelled data is often comparatively cheap.
+#   - The learning procedure was: fit the GMM on labelled data, use the current model to predict class probabilities for unlabelled points, then update the parameters using both labelled and softly labelled data.
+#   - He spent time answering why this must be **iterated**: once the parameters change, the probabilities for the unlabelled points also change, so the model must re-estimate them.
+#   - He tied this explicitly to the **Expectation-Maximisation (EM)** algorithm and said the procedure is not just ad hoc; it is a standard likelihood-based method in statistics and machine learning.
+#
+# ### Unsupervised GMMs and clustering
+#
+# - Marcus Gallagher then removed the labels entirely and described clustering as the unsupervised version of the same modelling story.
+#   - The goal becomes to detect whether the data appears to contain natural groups or dense regions in feature space.
+#   - He stressed two practical issues:
+#     - the cluster labels are unknown,
+#     - the number of mixture components/clusters must still be chosen.
+#   - The unsupervised GMM algorithm was presented as the same EM-style loop with a different first step: since there is no labelled data for initialization, the parameters must be initialised some other way, often randomly.
+#   - His message was conservative: this can work well, but success depends on reasonable initialization and the data actually having cluster structure that the model can capture.
+#
+# ### `k`-means as the hard-assignment simplification
+#
+# - He used the GMM story to motivate why `k`-means is not a completely separate idea, but a simplified special case in spirit.
+#   - The main conceptual change is from **soft probabilistic responsibilities** to **hard assignments** to the nearest cluster centre.
+#   - He described `k`-means as effectively throwing away the full Gaussian shape and retaining only the centres.
+#   - He also distinguished the distances involved:
+#     - GMM responsibilities implicitly use covariance-aware geometry,
+#     - `k`-means uses ordinary Euclidean distance.
+#   - He warned that evaluating clustering by matching clusters to known class labels can be misleading if the class structure and geometric cluster structure do not align.
+#
+# ### What slipped to next time
+#
+# - Marcus Gallagher ran short on time before principal component analysis.
+#   - He explicitly said PCA had not been covered yet even though students needed it for the prac.
+#   - His workaround was to put enough additional guidance on Ed so students could start the practical before the next lecture.
+#   - So the Week 3 lecture, as actually delivered, is mostly about **GMMs, EM, semi-supervised learning, unsupervised clustering, and the bridge to `k`-means**, with PCA deferred.
 
 # %%
 import random

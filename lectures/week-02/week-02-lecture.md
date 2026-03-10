@@ -26,9 +26,10 @@ jupyter:
   - [Problem types and intuition examples](#problem-types-and-intuition-examples)
   - [k-NN segment](#k-nn-segment)
   - [Decision tree segment](#decision-tree-segment)
-  - [Session Focus](#1-session-focus)
-  - [What Marcus Gallagher Emphasized](#2-what-marcus-gallagher-emphasized)
-  - [Core Concepts and Methods](#3-core-concepts-and-methods)
+  - [Decision-tree learning carry-over (covered at the start of Week 3)](#decision-tree-learning-carry-over-covered-at-the-start-of-week-3)
+  - [Session Focus](#session-focus)
+  - [What Marcus Gallagher Emphasized](#what-marcus-gallagher-emphasized)
+  - [Core Concepts and Methods](#core-concepts-and-methods)
 - [Chapter 2 summary](#chapter-2-summary)
   - [Supervised learning setup](#1-supervised-learning-setup)
   - [Generalisation is the objective](#2-generalisation-is-the-objective)
@@ -108,14 +109,26 @@ jupyter:
     - axis-aligned partition plot in 2D,
     - candidate split illustration with entropy-based selection.
 
-### 1. Session Focus
+### Decision-tree learning carry-over (covered at the start of Week 3)
+
+- Marcus Gallagher used the opening part of the following lecture to finish the missing "how the tree is learned" part that Week 2 ran out of time for.
+  - He used a 1D regression-tree demo to show that a decision tree produces a **piecewise-constant** function, with each leaf predicting the sample mean of the training targets in that region.
+  - For regression trees, he framed learning as choosing a split threshold that minimises the **sum of squared errors** over the left/right regions.
+  - He emphasized that only thresholds **between data points** matter on the training set; moving a split without crossing a data point does not change the objective.
+  - He then showed how the same split-search idea is applied **recursively**, so deeper trees create more constant pieces and can eventually drive training error very low or even to zero.
+  - He was explicit that this does **not** mean optimal generalisation: deep trees can fit the training data too closely, so stopping criteria or tree-depth limits matter.
+  - He answered a student question by clarifying that recursive binary splitting is a **greedy** algorithm: each local split is chosen to be best at that stage, but this does not guarantee a globally optimal tree.
+  - For classification trees, he kept the same left/right split structure but replaced squared error with an impurity criterion such as **misclassification rate, Gini index, or entropy**.
+  - He also tied tree depth back to the broader course theme of **hyperparameters** and noted, in the redo poll discussion, that decision trees are much less sensitive to feature scale than `k`-NN because standard trees split on one variable at a time.
+
+### Session Focus
 
 - Define supervised learning setup and output types (classification vs regression).
 - Build intuition for model behaviour using simple geometric examples.
 - Introduce `k`-NN and decision trees as core Week 2 methods.
 - Connect model complexity decisions (`k`, tree growth) to generalisation.
 
-### 2. What Marcus Gallagher Emphasized
+### What Marcus Gallagher Emphasized
 
 - Generalisation matters more than perfect training-set fit.
 - Simple/interpretable methods remain valuable in real practice.
@@ -123,7 +136,7 @@ jupyter:
 - Extrapolation is riskier than interpolation.
 - Decision tree training is greedy and needs stopping constraints.
 
-### 3. Core Concepts and Methods
+### Core Concepts and Methods
 
 - Supervised data notation: $T=\{(x_i, y_i)\}_{i=1}^n$.
 - Task types:
