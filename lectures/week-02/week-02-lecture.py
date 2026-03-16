@@ -530,7 +530,7 @@ print("Reproducible run check (seed fixed):", SEED)
 # ## Sources used
 #
 # - [1] [Lindholm textbook (Chapter 2)](../../references/main-text-book-machine-learning-lindholm-2022.pdf)
-# - [2] [MATLAB lecture notes 2026](../../references/lecture_notes_matlab_2026_v1.pdf)
+# - [2] [MATLAB lecture notes 2026](../../references/lecture_notes_matlab_2026_v2.pdf)
 # - [3] [Course summary table v1.26](../../references/CourseSummaryTable_v1_26.pdf)
 # - [4] [2023 exam PDF](../../references/2023_COMP4702_exam.pdf)
 # - [5] [2024 exam PDF](../../references/2024_COMP4702_exam.pdf)

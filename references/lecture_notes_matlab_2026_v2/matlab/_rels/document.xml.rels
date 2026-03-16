@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Target="../media/image1.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId10" Target="../media/image8.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId11" Target="../media/image9.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId12" Target="../media/image10.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId13" Target="../media/image11.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId14" Target="../media/image12.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId15" Target="../media/image13.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId16" Target="../media/image14.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId17" Target="../mathml/eqn1.mml" Type="http://www.w3.org/TR/MathML2/"/>
+  <Relationship Id="rId18" Target="../media/image15.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId19" Target="../media/image16.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId2" Target="../media/image2.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId20" Target="../media/image17.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId21" Target="../media/image18.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId22" Target="../media/image19.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId23" Target="../media/image20.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId24" Target="../media/image21.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId3" Target="../media/image3.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId4" Target="../media/image1.jpeg" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId5" Target="../media/image2.jpeg" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId6" Target="../media/image4.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId7" Target="../media/image5.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId8" Target="../media/image6.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+  <Relationship Id="rId9" Target="../media/image7.png" Type="http://schemas.mathworks.com/matlab/code/2013/relationships/image"/>
+</Relationships>
