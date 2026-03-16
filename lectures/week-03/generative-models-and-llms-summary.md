@@ -1,3 +1,16 @@
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: -all
+    main_language: python
+    notebook_metadata_filter: kernelspec,jupytext
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.19.1
+---
+
 # Generative Models and LLMs
 
 ## The connection between Lindholm-style generative models and LLMs
