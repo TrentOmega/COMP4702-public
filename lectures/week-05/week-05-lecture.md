@@ -21,6 +21,16 @@ jupyter:
 
 - [Scope for Week 5](#scope-for-week-5)
 - [Learning goals for this notebook](#learning-goals-for-this-notebook)
+- [Week 5 lecture summary (follow delivery order)](#week-5-lecture-summary-follow-delivery-order)
+  - [1. Opening exam question: read the tree, then justify the path](#1-opening-exam-question-read-the-tree-then-justify-the-path)
+  - [2. Why this week matters even if it feels theoretical](#2-why-this-week-matters-even-if-it-feels-theoretical)
+  - [3. The real objective: expected new data error](#3-the-real-objective-expected-new-data-error)
+  - [4. Assumptions behind the theory](#4-assumptions-behind-the-theory)
+  - [5. Why training error is not enough](#5-why-training-error-is-not-enough)
+  - [6. Estimating new-data performance in practice](#6-estimating-new-data-performance-in-practice)
+  - [7. Model complexity and the generalisation gap](#7-model-complexity-and-the-generalisation-gap)
+  - [8. Bias-variance decomposition as the main conceptual tool](#8-bias-variance-decomposition-as-the-main-conceptual-tool)
+  - [9. Binary-classifier evaluation and the closing exam link](#9-binary-classifier-evaluation-and-the-closing-exam-link)
 - [Chapter 4 summary](#chapter-4-summary)
   - [Performance in production: expected new data error](#performance-in-production-expected-new-data-error)
   - [Estimating Expected New Data Error](#estimating-expected-new-data-error)
@@ -49,13 +59,84 @@ jupyter:
 - Techniques: hold-out validation, `k`-fold cross-validation, confusion matrices, ROC curves.
 - Reading: [Lindholm (2022), Chapter 4](../../references/main-text-book-machine-learning-lindholm-2022.pdf).
 - Prac alignment: Week 5 practical covers performance; demos continue this week.
-- Source note: the secondary MATLAB notes referenced by the skill were not present locally in `references/`, so these notes are grounded in the course summary, Lindholm Chapter 4, and the indexed exam materials only.
+- Source note: these notes use the week 5 transcript, Lindholm Chapter 4, the local MATLAB lecture notes bundle in `references/lecture_notes_matlab_2026_v2.pdf`, and the indexed exam materials.
 
 ## Learning goals for this notebook
 
 1. Explain what the course means by performance "in production" and why `E_train` is not the quantity we actually care about.
 2. Distinguish hold-out validation, `k`-fold cross-validation, validation-based model selection, and the role of a final test set.
 3. Connect underfitting, overfitting, generalisation gap, bias-variance, confusion matrices, and ROC-AUC to the style of questions that show up in COMP4702 exams.
+
+## Week 5 lecture summary (follow delivery order)
+
+### 1. Opening exam question: read the tree, then justify the path
+
+- Marcus Gallagher opened with an Echo poll built from a 2025-style decision-tree exam question on the Iris dataset before moving into the new theory.
+  - The immediate task was not "know this week's formulas first"; it was to read a trained tree, trace a test point from the root through the thresholds, and explain why the final leaf gives the prediction.
+  - He explicitly pointed out that a few marks come from the explanation, not just the class label, so exam answers need the decision path in words.
+  - This opening set up a theme for the whole lecture: evaluation questions in COMP4702 are often about interpreting model behaviour carefully, not just quoting definitions.
+
+### 2. Why this week matters even if it feels theoretical
+
+- Marcus Gallagher said Week 5 and Week 6 step back from introducing new model families so the course can build firmer foundations for judging whether a model is actually any good.
+  - He called the topic a bit dry, but also said it is "really very, very important", especially because modern AI work is often evaluated too quickly and too loosely.
+  - His framing was practical: if evaluation is weak, any downstream claim about model quality is weak too.
+  - Exam-focused interpretation: when a question asks about validation, model choice, or overfitting, the marker is looking for this disciplined evaluation mindset rather than a memorised slogan.
+
+### 3. The real objective: expected new data error
+
+- Marcus Gallagher then reframed supervised learning around `E_new`, the expected new data error, as the quantity we actually want to make small.
+  - He tied `E_new` directly to the plain-language idea of "performance in production": how the model behaves on data it has never seen before.
+  - He distinguished the **error function** used for evaluation from the **loss function** used for training, stressing that they can differ even though they should still be related.
+  - The concrete examples he gave were squared error for regression and misclassification error for classification.
+  - The textbook equations matter here, but his spoken emphasis was conceptual: low training loss is not the same statement as good generalisation.
+
+### 4. Assumptions behind the theory
+
+- Marcus Gallagher justified the `E_new` setup by introducing the default probabilistic assumptions sitting behind most of the course material.
+  - Data are imagined as coming from an underlying distribution `p(x, y)` that we do not know directly.
+  - He said the analysis assumes that distribution is **stationary**, so data collected at different times are still governed by the same process.
+  - He also assumed the data are drawn **IID**: independent and identically distributed, with no special meaning attached to the order in which points appear.
+  - His explicit counterexample was time-series prediction, where non-stationarity and dependence usually break these assumptions.
+  - Inference from supporting material: this is the background that makes hold-out validation and cross-validation sensible in the first place.
+
+### 5. Why training error is not enough
+
+- After defining `E_train`, Marcus Gallagher paused on the book's deliberately strong claim that training error "gives no information" about performance on unseen data.
+  - He said it sounds weird at first, then defended it with the lookup-table example: a model can memorise the training set and score perfectly on `E_train` while being useless as a predictor.
+  - The message was conservative rather than absolute: training performance can be encouraging, but it is not an honest estimate of future performance by itself.
+  - This is the core Week 5 correction to the instinct that "small training error means the model is good."
+
+### 6. Estimating new-data performance in practice
+
+- Marcus Gallagher moved from the theoretical `E_new` definition to the practical question of how to estimate it well enough to compare models and choose hyperparameters.
+  - He linked this directly to **model selection** and **model configuration**: choosing a model family such as a decision tree versus logistic regression, and then choosing settings such as tree depth or `k` in `k`-NN.
+  - He also framed performance estimation as a stakeholder question: if someone pays for a model, they reasonably want a defensible estimate of how well it will perform after deployment.
+  - Inference cross-checked against the rest of the notebook and Chapter 4: this is the point in the lecture where hold-out validation, `k`-fold cross-validation, and the role of a final untouched test set fit into the story.
+
+### 7. Model complexity and the generalisation gap
+
+- Marcus Gallagher used the textbook figures to connect model complexity with the gap between training performance and new-data performance.
+  - His running point was that increasing complexity often lowers training error while widening the generalisation gap.
+  - He walked through examples where the complexity control differs by model family: tree depth for regression trees and regularisation strength for linear-style models.
+  - He answered a class question by saying this picture is mainly conceptual at this stage; the goal is to understand the phenomenon before turning it into concrete procedures.
+  - Exam-focused interpretation: for COMP4702, "underfitting" and "overfitting" answers should describe the joint behaviour of training fit, generalisation gap, and model complexity rather than treating them as isolated buzzwords.
+
+### 8. Bias-variance decomposition as the main conceptual tool
+
+- Marcus Gallagher presented bias-variance decomposition as the most useful theoretical lens for explaining why the complexity picture behaves the way it does.
+  - He first backed out to a statistics example using noisy GPS location measurements to separate **bias** (systematic offset from the truth) from **variance** (sampling-driven variability across repeated measurements).
+  - He then mapped that idea back to machine learning: the learned predictor changes when the training set changes, and expected squared error can be decomposed into squared bias, variance, and irreducible error.
+  - His explicit instruction was not to memorise a derivation, but to understand what each term means and how the terms move as model complexity changes.
+  - He also highlighted [Lindholm (2022), Example 4.3 and Example 4.4](../../references/main-text-book-machine-learning-lindholm-2022.pdf) as the textbook examples worth reading carefully this week because they make the trade-off concrete.
+
+### 9. Binary-classifier evaluation and the closing exam link
+
+- Marcus Gallagher used the last part of the lecture to introduce evaluation tools that are more informative than a single error rate, especially for binary classifiers.
+  - He defined the confusion matrix through the four outcomes `TN`, `FN`, `FP`, and `TP`, and stressed that it reveals which kind of error the classifier is making.
+  - He flagged `F1` as a common metric when classes are imbalanced or when one type of mistake matters more than the other.
+  - He also mentioned ROC curves, but said he would spend a few minutes on them next week instead of pushing too much into the final minutes of this lecture.
+  - The lecture closed by returning to the opening exam figure and asking the class to think about the confusion matrix implied by that decision tree, which neatly linked the theory back to the exam style from the first five minutes.
 
 ```python
 import random

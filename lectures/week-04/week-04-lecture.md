@@ -21,6 +21,14 @@ jupyter:
 
 - [Scope for Week 4](#scope-for-week-4)
 - [Learning goals for this notebook](#learning-goals-for-this-notebook)
+- [Week 4 lecture summary (follow delivery order)](#week-4-lecture-summary-follow-delivery-order)
+  - [1. Framing the week](#1-framing-the-week)
+  - [2. Linear regression in high dimensions](#2-linear-regression-in-high-dimensions)
+  - [3. Why squared error and where MLE fits](#3-why-squared-error-and-where-mle-fits)
+  - [4. Categorical variables as one-hot features](#4-categorical-variables-as-one-hot-features)
+  - [5. Logistic regression as probabilistic classification](#5-logistic-regression-as-probabilistic-classification)
+  - [6. Softmax and multiclass classification](#6-softmax-and-multiclass-classification)
+  - [7. Polynomial regression and model complexity](#7-polynomial-regression-and-model-complexity)
 - [Chapter 3 summary](#chapter-3-summary)
   - [Parametric vs non-parametric models](#1-parametric-vs-non-parametric-models)
   - [Linear regression](#2-linear-regression)
@@ -59,6 +67,63 @@ jupyter:
 1. Understand how parametric models differ from the non-parametric methods in Week 2, and why learning reduces to finding parameter values.
 2. Derive and interpret the least-squares solution for linear regression, and connect it to the maximum likelihood perspective under Gaussian noise.
 3. Explain how logistic regression adapts the linear model for classification, including the logistic function, cross-entropy loss, and decision boundaries at $g(\mathbf{x}) = 0.5$.
+
+## Week 4 lecture summary (follow delivery order)
+
+### 1. Framing the week
+
+- Marcus Gallagher opened the lecture by saying Week 4 is mostly about three models: linear regression, logistic regression, and polynomial regression.
+  - He stressed that the week is not only "lots of regression"; it also introduces notation and theory that will keep reappearing later in the course.
+  - He noted that he had updated the lecture notes with extra pictures, and that the live class would mostly follow those notes plus the textbook rather than MATLAB demos.
+  - Marcus Gallagher also said the label "parametric" is not especially useful on its own; the useful part is seeing how these models are trained and what assumptions they make.
+
+### 2. Linear regression in high dimensions
+
+- Marcus Gallagher treated linear regression as familiar straight-line fitting, but pushed the class to think in the machine-learning setting where the same idea must scale from 1D pictures to 10, 100, or more input dimensions.
+  - The output is still one-dimensional in the week 4 examples, but the input vector can be high-dimensional, which is why the notation shifts to vectors and matrices.
+  - He emphasised the role of $\theta_0$ as the offset/intercept: without it, the fitted line would be forced through the origin, which is usually too restrictive.
+  - The visual story matters: black dots are observed training points, points on the line are predictions $\hat{y}(x)$, and the gap between them is the prediction error.
+  - The clean figure to remember here is the textbook-style line-fit diagram with squared residual boxes; the updated lecture notes were explicitly edited to make those visuals easier to follow.
+
+### 3. Why squared error and where MLE fits
+
+- Marcus Gallagher motivated squared error from the picture first: if perfect prediction means every residual is zero, then training should minimise those residuals, and the squared version gives the familiar least-squares objective.
+  - He framed additive noise $\varepsilon$ as a practical modelling assumption: even if the underlying relationship is linear, observed data points are usually corrupted by noise, so zero training error is not the default expectation.
+  - He then connected least squares to maximum likelihood: once additive noise is assumed Gaussian and independent across examples, minimising squared error is equivalent to maximising the likelihood (or log-likelihood).
+  - Exam emphasis from the lecture: Marcus Gallagher said he would not expect memorised derivations, but he does expect you to be able to follow the algebra and reason about the steps if they are shown in a question.
+  - He also highlighted why logs appear: the likelihood becomes a product of many small probabilities, so the log-likelihood turns that into a numerically friendlier sum without changing the optimiser.
+
+### 4. Categorical variables as one-hot features
+
+- Before the break, Marcus Gallagher inserted a short but important aside on categorical inputs: the week's formulas often assume real-valued inputs, but real datasets frequently contain categories.
+  - For two categories, he described using a single dummy variable such as $0/1$.
+  - For more than two categories, he moved to one-hot encoding, where each category gets its own binary indicator and each row contains exactly one `1`.
+  - He noted that this creates sparse, wider input matrices and flagged that this representation will keep returning later in the course, including in neural networks.
+
+### 5. Logistic regression as probabilistic classification
+
+- Marcus Gallagher explicitly warned the class not to be fooled by the name: logistic regression is used for classification, not for regression.
+  - The construction is "linear regression plus a squashing function": start from the linear score $z = \theta^\top x$, then apply the logistic function so the output lies in $[0,1]$ and can be read as a class probability.
+  - He used the 3D surface picture to show that the threshold at $0.5$ induces the actual class decision.
+  - His practical interpretation was that probabilities near $0.5$ mean the model is uncertain, so the probability output contains information a hard label would hide.
+  - The clean visual to remember is the logistic surface sliced at height $0.5$; viewed from above, that slice becomes the linear decision boundary.
+
+### 6. Softmax and multiclass classification
+
+- After binary logistic regression, Marcus Gallagher extended the discussion to multiclass classification.
+  - The main idea was to produce one score per class and then normalise them with softmax so the outputs form sensible probabilities that sum to one.
+  - He tied this back to one-hot targets: a 3-class problem needs 3 outputs, a 10-class problem needs 10 outputs.
+  - He described this as the "neural network way" of handling multiclass prediction, which is useful because the same pattern will reappear later in the course.
+
+### 7. Polynomial regression and model complexity
+
+- Marcus Gallagher ended with polynomial regression and used it to open the broader course theme of model complexity.
+  - He acknowledged the intuitive view that polynomial regression looks non-linear, but explained the book's perspective: if you first transform the input into features like $x, x^2, x^3$, the model is still linear in the parameters.
+  - That viewpoint matters because it means polynomial regression can be trained with the same closed-form machinery as linear regression once the transformed design matrix is built.
+  - He explicitly said this feature-transformation view will matter later for methods such as kernel methods and support vector machines.
+  - The lecture emphasis was not just "higher degree fits better": Marcus Gallagher used the high-degree curve example to show why lower training error does not guarantee sensible test predictions.
+  - His stopping-distance example makes the overfitting warning concrete: a very flexible polynomial can fit the observed points yet predict something absurd like a hugely negative stopping distance on a new input.
+  - He closed by previewing regularisation as one practical way to control model complexity, with L2 regularisation penalising large parameter values via the $\lambda \lVert \theta \rVert_2^2$ term.
 
 ```python
 import random

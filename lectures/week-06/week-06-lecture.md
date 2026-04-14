@@ -21,6 +21,15 @@ jupyter:
 
 - [Scope for Week 6](#scope-for-week-6)
 - [Learning goals for this notebook](#learning-goals-for-this-notebook)
+- [Week 6 lecture summary (follow delivery order)](#week-6-lecture-summary-follow-delivery-order)
+  - [1. Finish last week's classifier-evaluation tools](#1-finish-last-weeks-classifier-evaluation-tools)
+  - [2. ROC curves as threshold-trade-off pictures](#2-roc-curves-as-threshold-trade-off-pictures)
+  - [3. Class imbalance, asymmetric costs, and why F1 is not automatic](#3-class-imbalance-asymmetric-costs-and-why-f1-is-not-automatic)
+  - [4. Broad optimisation framing before the chapter details](#4-broad-optimisation-framing-before-the-chapter-details)
+  - [5. Loss functions as modelling choices, not just maths tricks](#5-loss-functions-as-modelling-choices-not-just-maths-tricks)
+  - [6. Regularisation as explicit or implicit control of complexity](#6-regularisation-as-explicit-or-implicit-control-of-complexity)
+  - [7. Gradient descent as the main Week 6 optimisation algorithm](#7-gradient-descent-as-the-main-week-6-optimisation-algorithm)
+  - [8. Large datasets, mini-batches, and the preview for next week](#8-large-datasets-mini-batches-and-the-preview-for-next-week)
 - [Chapter 5 summary](#chapter-5-summary)
   - [Training objective as a proxy for generalisation](#training-objective-as-a-proxy-for-generalisation)
   - [Loss functions and likelihood-based models](#loss-functions-and-likelihood-based-models)
@@ -52,15 +61,87 @@ jupyter:
 - Important concepts: optimisation, loss functions, regularisation.
 - Algorithms and methods: gradient descent, stochastic gradient descent, mini-batches, Newton and quasi-Newton methods, validation-based hyperparameter tuning.
 - Reading: [Lindholm (2022), Chapter 5](../../references/main-text-book-machine-learning-lindholm-2022.pdf).
-- Prac alignment: Week 6 practical focuses on performance and loss functions; demos continue this week.
+- Prac alignment: Week 6 practical continues classifier evaluation while introducing loss functions, regularisation, and optimisation behaviour.
 - Schedule note: the course summary flags the Good Friday public holiday in Week 6.
-- Source note: the secondary MATLAB notes referenced by the skill were not present locally in `references/`, so these base notes are built from the course summary, Lindholm Chapter 5, and the indexed exam materials only.
+- Source note: these notes use the week 6 transcript, Lindholm Chapter 5, the local MATLAB lecture-notes bundle in `references/lecture_notes_matlab_2026_v2.pdf`, and the indexed exam materials.
 
 ## Learning goals for this notebook
 
 1. Explain why training a parametric model is formulated as an optimisation problem, while remembering that the real target is generalisation on unseen data.
 2. Distinguish the main loss functions and regularisation methods in Chapter 5, including what behaviour they encourage and what can go wrong.
 3. Connect learning rates, SGD, explicit regularisation, and validation-based tuning to the style of questions that have appeared in recent COMP4702 exams.
+
+## Week 6 lecture summary (follow delivery order)
+
+### 1. Finish last week's classifier-evaluation tools
+
+- Marcus Gallagher opened by explicitly saying he wanted to spend a few minutes finishing the rushed end of Week 5 before moving into Chapter 5.
+  - He used a confusion matrix first, describing it as a table that does more than count errors: it shows *which* class confuses with which other class.
+  - His concrete example was MNIST, where a confusion matrix can reveal specific mistakes such as a true `6` being predicted as a `3`, not just the total misclassification rate.
+  - Practical link: he pointed out that scikit-learn should have tooling for this and suggested looking for it in the practical.
+  - Visual to revisit here: a multi-class confusion-matrix heatmap with the diagonal and off-diagonal errors highlighted; the clean version should come from the MATLAB notes bundle or your own prac output rather than a web screenshot.
+
+### 2. ROC curves as threshold-trade-off pictures
+
+- Marcus Gallagher then used logistic regression to explain ROC curves as what happens when the decision threshold is varied instead of being fixed at `0.5`.
+  - His main spoken emphasis was that the threshold is itself part of the decision procedure, so changing it changes the trade-off between true positives and false positives.
+  - He described the ROC curve as the joined-up result of many threshold settings, with better classifiers pushing the curve toward the top-left corner.
+  - He also noted the random-guess baseline and said a classifier whose ROC curve dips below it is a warning sign that something is wrong.
+  - Exam-focused interpretation: if two ROC curves cross, that is still possible; Marcus Gallagher used the first Echo poll to make exactly that point.
+  - Visual to revisit here: the standard ROC plot with the random baseline and a curve bending toward the top-left; the clean canonical version is the ROC figure in the written notes or textbook-style material, not the in-class browser image.
+
+### 3. Class imbalance, asymmetric costs, and why F1 is not automatic
+
+- Marcus Gallagher used the ROC discussion to step into real-world decision making under uncertainty, especially when classes are imbalanced or one type of mistake matters more than another.
+  - He said the course often keeps datasets balanced and error costs symmetric because that is easier for teaching, but real applications often break those assumptions.
+  - He mentioned precision-recall curves as an alternative emphasis and defined recall as the fraction of actual positives recovered.
+  - He also flagged F1 score as common and reasonable when imbalance matters, especially when the negative class dominates.
+  - His assignment advice was deliberately conservative: if there is no good reason to prefer F1, use misclassification rate because it is easier to interpret and defend.
+
+### 4. Broad optimisation framing before the chapter details
+
+- After closing the Week 5 material, Marcus Gallagher reframed Chapter 5 as mainly being about optimisation rather than just another list of model formulas.
+  - He backed away from the notes and gave the generic optimisation problem `x^* = argmin_x f(x)` before translating back to machine learning notation.
+  - A key distinction in his spoken explanation was between the *value* of the minimum and the *argument* that attains it: in ML we want the parameter vector, not just the minimum loss value.
+  - He treated optimisation as a general search problem over decision variables, potentially with constraints that rule out nonsensical solutions.
+  - He also widened the lens beyond ML by contrasting continuous, discrete, combinatorial, and mixed-variable problems, and by mentioning black-box optimisation where `f` is only available through a simulator.
+  - Inference from the textbook plus transcript: this broad framing is there to stop you treating gradient descent as the only optimisation idea that exists.
+
+### 5. Loss functions as modelling choices, not just maths tricks
+
+- Marcus Gallagher then returned to the chapter structure and stressed that loss functions encode modelling assumptions, not just computational convenience.
+  - For regression he contrasted squared error, absolute error, Huber loss, and epsilon-insensitive loss in terms of how harshly they penalise residual size.
+  - For classification he said misclassification error is useful for evaluation but poor for training because it is piecewise constant and gives an unhelpful gradient signal.
+  - He tied logistic regression back to maximum likelihood, saying that this route leads to cross-entropy loss.
+  - He also previewed margin-based losses by interpreting `y f(x)` as distance-from-boundary information that later becomes central for support vector machines.
+  - Transcript clarification recorded here: the transcript contains a brief numbering stumble around the misclassification-loss equation, but the intended reference is the Chapter 5 classification-loss section, not a different concept.
+
+### 6. Regularisation as explicit or implicit control of complexity
+
+- Marcus Gallagher presented regularisation as the standard way to make the optimisation problem prefer simpler models, even if that slightly worsens training fit.
+  - He wrote the regularised objective as the original cost plus `lambda R(theta)`, with `lambda` acting as the hyperparameter that controls the trade-off.
+  - He described L2 regularisation as ridge regression / weight decay and L1 regularisation as lasso, then linked them to the practical where you can inspect how logistic-regression coefficients change.
+  - His strongest practical point was that L1 can drive many coefficients exactly to zero, so it effectively performs feature selection.
+  - When asked why coefficient size should relate to complexity, he used polynomial regression as the most convincing intuition: wild higher-order behaviour needs higher-order terms with non-trivial coefficients.
+  - He then broadened the idea to implicit regularisation, naming early stopping, dropout, data augmentation, and decision-tree splitting criteria.
+
+### 7. Gradient descent as the main Week 6 optimisation algorithm
+
+- Marcus Gallagher treated gradient descent as machine learning's default optimiser for continuous parameter problems.
+  - The algorithmic skeleton was: choose an initial point, choose a learning rate `gamma`, then repeatedly update parameters by stepping in the direction of the negative gradient.
+  - He emphasised that convergence behaviour depends heavily on the learning rate, and pointed the class to Chapter 5 examples that show slow progress, overshooting, or failure to settle.
+  - His broader conceptual warning was that on non-convex objectives gradient descent may find *a* local minimum rather than *the* best one.
+  - He contrasted this with closed-form solutions such as ordinary linear regression and briefly mentioned coordinate descent as another optimisation family.
+  - Visual to revisit here: the contour plots of convex and non-convex objectives, plus the textbook path-tracing picture for gradient descent steps.
+
+### 8. Large datasets, mini-batches, and the preview for next week
+
+- Marcus Gallagher closed by sketching what changes once the objective is a sum over many data points and evaluating the full gradient becomes expensive.
+  - He said this is where stochastic gradient descent and mini-batches come from: use a subset, or even a single example, to approximate the full gradient.
+  - He also flagged hyperparameter optimisation as a separate layer above parameter learning, with `lambda`, batch size, and learning rate as the kinds of choices you still need to tune.
+  - He briefly mentioned second-order methods such as Newton and quasi-Newton approaches, but mostly as a contrast class because the Hessian becomes unwieldy when the parameter count grows.
+  - The closing Echo poll previewed the next lecture's discussion of batch size versus learning rate, and he explicitly said the class had not yet covered enough material to answer that question fairly.
+  - Course logistics note from the lecture: assignment information was to be released the next day.
 
 ```python
 import random
