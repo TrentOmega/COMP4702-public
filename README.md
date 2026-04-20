@@ -5,8 +5,8 @@ Coursework repository for `COMP4702`, organised for reproducible study, practica
 <!-- AUTO:PROJECT_OVERVIEW:START -->
 ## Project Review Snapshot (auto-generated)
 
-- `lectures/` is populated with 12 week folder(s) and 51 non-placeholder file(s).
-- `pracs/` (not public) is populated with 12 week folder(s) and 43 non-placeholder file(s).
+- `lectures/` is populated with 12 week folder(s) and 54 non-placeholder file(s).
+- `pracs/` (not public) is populated with 12 week folder(s) and 46 non-placeholder file(s).
 - `references/` is populated with 41 non-placeholder file(s), including 6 top-level PDF reference(s).
 - `assignment/` (not public) is populated with 48 non-placeholder file(s).
 - `shared/` (not public) is currently scaffolded (`.gitkeep`/folders only).
